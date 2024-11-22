@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "iskiny",
+  "version": "2.0",
+  "content_scripts": [
+    {
+      "matches": [ "http://foggystation.starcombats.com/main*" ],
+      "js": ["/jquery-3.5.1.js","/background.js"],
+      "run_at":"document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/injected.js"
+  ]
+}
