@@ -19,7 +19,7 @@ function injected_main(){
                  gorizont='',
                  vertical='',
                  nomerSektor = '',
-                 centGor = 55,
+                 centGor = 56,
                  centVer = 5;
                 for (var i =0; i<= polSec.length - 1; i++) {
                       if (i===polSec.length-1) { 

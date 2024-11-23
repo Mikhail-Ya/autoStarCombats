@@ -167,8 +167,8 @@ function use_scroll(id) {
 //--47065(30.08) --47824(31.08)
 function injected_main() {
   let ispolzAbil50 = 80;
-  let ispolzAbil100 = 101;
-  let ispolzAbil200 = 55;
+  let ispolzAbil100 = 50;
+  let ispolzAbil200 = 50;
   let abilkaGos = 0;
   let abilkaEkr = 0;
   let stoperInd = true;
