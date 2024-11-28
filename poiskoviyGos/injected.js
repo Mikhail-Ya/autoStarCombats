@@ -501,7 +501,7 @@ function injected_main() {
   let dubleSector;
   let dubleSectorPoint = 0;
   // номер поискового
-  const poiskNom = 3; // номер поискового...
+  const poiskNom = 2; // номер поискового...
   const kakProhod = 0; // 1 = прохождение, 0 = дроп...
   const limitKont = 5; // сколько контенеров по квету до обмена
   let kolKont = 0;
@@ -1397,7 +1397,7 @@ function injected_main() {
       setTimeout(obnovit, obnovRn);
     } else {
       setTimeout(() => {
-        let perezagruz = mainOkno.querySelector("#targeting");
+        let perezagruz = mainOkno.querySelector("#reactor");
         if (perezagruz) {
           perezagruz.click();
         }

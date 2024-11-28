@@ -124,9 +124,9 @@ function use_scroll(id) {
 }
 // "editor.unicodeHighlight.ambiguousCharacters": false 660 - 270 =  
 function injected_main(){
-    let abils50 = 0,
-    abils100 = 20,
-    abils200 = 10,
+    let abils50 = 80,
+    abils100 = 50,
+    abils200 = 60,
     gos = 0,
     euro = 0,
     stavim = 0,// каким ставим
@@ -135,7 +135,7 @@ function injected_main(){
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 36,
+    started = 56,
     main;
     const obnovScript = () => {
         main = document.getElementsByName('mainWindow')[0].contentDocument
