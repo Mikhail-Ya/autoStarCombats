@@ -430,9 +430,9 @@ function injected_main(){
         let dubleSector;
         let dubleSectorPoint = 0;
         // номер поискового 386
-        const poiskNom = 2; // номер поискового...
-        const kakProhod = 0; // 1 = прохождение, 0 = дроп...
-        const limitKont = 33; // сколько контенеров по квету до обмена
+        const poiskNom = 1; // номер поискового...
+        const kakProhod = 1; // 1 = прохождение, 0 = дроп...
+        const limitKont = 35; // сколько контенеров по квету до обмена
         let kolKont = 0; 
         let trigger1 = 0;
         let trigger2 = 0;
@@ -1446,7 +1446,7 @@ function injected_main(){
         },3000)}
 
         let obnovit=()=>{
-                let timeRand = Math.floor(Math.random()*1000)+4000;
+                let timeRand = Math.floor(Math.random()*1000)+3500;
                 let dateInterval = setInterval(()=>{
                         let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                         let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;

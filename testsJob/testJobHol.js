@@ -1,4 +1,18 @@
+// расчет максимального минимально возможных ваиантов шага при двух подходах
+function maxlimit(leng) {
+    let result = leng, check = 0;
+    
+    for (let index = 0; index < leng; index++) {
+        let sum = leng/index+index
+        if(sum < result){
+            result = sum;
+            check = index
+        }
+    }
+    return (result + '  ' + check)
+}
 
+// склонение слова "компьютер", в зависимости от количества
 function declensWord(num){
     let str = 'компьютер';
     let numberEnd = num%10;
@@ -10,6 +24,7 @@ function declensWord(num){
     return num+' '+str
 }
 
+// таблица умножения в консоль
 function multiTable(num) {
     let table = '';
     for (let i = 0; i <= num; i++) {
@@ -24,6 +39,7 @@ function multiTable(num) {
  console.log(table)
 }
 
+// простые числа от и до 
 function simpleNumber(min,max) {
     let result = []
     for (let index = min; index <= max; index++) {
@@ -34,6 +50,7 @@ function simpleNumber(min,max) {
     return result
 }
 
+// получить деапозон общих делителей 
 function getRange(arr) {
     let result = [];
     let count = 0;
