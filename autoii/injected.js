@@ -176,7 +176,7 @@ function injected_main() {
   let povtorVrem = 24;
   let povtorVrem1 = 24;
   let last_minuty = 0;
-  let isklyuchit = [14, 7, 19]; // искинов какого уровня не ищем
+  let isklyuchit = [14, 7, 8]; // искинов какого уровня не ищем
   let iskDup = [15, 17, 18]; // какие искины ставятся третьими
   let limit = 23;
   let iskinLimit = "13";

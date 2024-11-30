@@ -135,7 +135,7 @@ function injected_main(){
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 12,
+    started = 25,
     main;
     const obnovScript = () => {
         main = document.getElementsByName('mainWindow')[0].contentDocument
