@@ -63,14 +63,11 @@ function injected_main(){
         let iskomoe = new Array;
         let iskomoeKol = 0;
         let iskomoeName = 'Мультистрелок v3.0 CV';
-        let obshee = mainOkno.querySelectorAll('#type1_1 .item');
-
-          let scripts = mainOkno.getElementsByTagName('script').length
-                                 
-                                 var script = document.createElement("script");
-                                 script.setAttribute("type", "text/javascript");
-                                 script.innerHTML = delete_scroll ;
-                                 mainOkno.getElementsByTagName('head')[0].appendChild(script);
+        let obshee = mainOkno.querySelectorAll('#type1_1 .item'); 
+              var script = document.createElement("script");
+                  script.setAttribute("type", "text/javascript");
+                  script.innerHTML = delete_scroll ;
+                  mainOkno.getElementsByTagName('head')[0].appendChild(script);
 
         for (var i = obshee.length - 1; i >= 0; i--) {
 

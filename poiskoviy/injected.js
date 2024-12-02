@@ -466,10 +466,10 @@ function injected_main() {
   let dubleSector;
   let dubleSectorPoint = 0;
   // номер поискового 386
-  const poiskNom = 2; // номер поискового...
+  const poiskNom = 3; // номер поискового...
   const kakProhod = 1; // 1 = прохождение, 0 = дроп...
   const limitKont = 35; // сколько контенеров по квету до обмена
-  let kolKont = 28;
+  let kolKont = 0;
   let trigger1 = 0;
   let trigger1_2 = 0;
   let trigger2 = 0;
@@ -479,7 +479,7 @@ function injected_main() {
   let triggerB = 0;
   let trigger6 = 0;
   let hod = () => {
-//     clearInterval(dateInterval);
+   clearTimeout();
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
     let panelMenu = document.getElementsByName("menuWindow")[0].contentDocument;
     let sector = mainOkno.querySelector("#sector").textContent;
@@ -1489,7 +1489,7 @@ function injected_main() {
   };
 
   let testAuto = () => {
-//     clearInterval(dateInterval);
+     clearTimeout();
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
     let panelMenu = document.getElementsByName("menuWindow")[0].contentDocument;
     let navigBtn = panelMenu.querySelector(".right img:last-of-type");
@@ -1497,7 +1497,10 @@ function injected_main() {
     let iskomoeKol = 0;
     let iskomoeName = "Контейнер с запчастями";
     let obshee = mainOkno.querySelectorAll(".item");
-
+    if(!obshee){
+      obnovit()
+      return
+    }
     let scripts = mainOkno.getElementsByTagName("script").length;
 
     var script = document.createElement("script");
@@ -1533,7 +1536,6 @@ function injected_main() {
       }
       if (delBtn) {
         iskomoeKol--;
-        console.log("удалил " + delBtn.attributes[6].textContent);
         delBtn.click();
       }
     }, 3000);
@@ -1553,6 +1555,7 @@ function injected_main() {
       if (kolKont >= limitKont && sector !== null && kakProhod === 0) {
         let trumeBtn = panelMenu.querySelector("#menu1 img:nth-child(8)");
         trumeBtn.click();
+        setTimeout(obnovit,timeRand)
       } else if (sector != null || sector != undefined) {
         let oblomki = [
           mainOkno.querySelector("#obj_front"),
@@ -1710,7 +1713,7 @@ function injected_main() {
         setTimeout(obnovit, 5000+timeRand);
       }
 //     }, timeRand);
-      console.log('obnov')
+     
   };
   setTimeout(obnovit, 5000);
 }

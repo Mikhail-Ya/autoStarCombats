@@ -1,16 +1,26 @@
 // расчет максимального минимально возможных ваиантов шага при двух подходах
 function maxlimit(leng) {
-    let result = leng, check = 0, lastSection = 0;
-    
-    for (let index = 1; index < leng; index++) {
-        let sum = leng/index+index
-        if(sum < result){
-            result = sum;
-            check = index;
-            lastSection = Math.floor(leng/index)+leng%index;
+    let result = leng, step = 0, count = 0;
+    function recur(last){
+        if(last > 2 ){
+            let num = last/2
+            count++
+            recur(num)
+        } else {
+            return count+last
         }
     }
-    return (result+'   '+check+'  '+lastSection);
+    for (let index = 1; index < leng; index++) {
+        let lastSection = leng%index;
+        recur(lastSection)
+        let sum = Math.floor(leng/index)+index+count;
+        if(sum < result){
+            result = sum;
+            step = index;
+        }
+        count = 0
+    }
+    return (result+'   '+step);
 }
 
 // склонение слова "компьютер", в зависимости от количества
