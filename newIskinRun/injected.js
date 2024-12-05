@@ -173,10 +173,20 @@ function injected_main(){
             let podatString = podatKnop.textContent
             if(kol >= stavim && downup || !downup && kol === stavim || trigger && kol <= proba){
                 if(podatString === 'Подать заявку') {
-                    if(complect){
-                        main.getElementById('new_complects').querySelector('li:nth-child(4)').click();
+                    let plaginy = main.querySelectorAll('.viod img');
+                    let kitActive = Boolean;
+                       for (var pl = 0; pl < plaginy.length; pl++) {
+                           if (plaginy[pl].src !== 'http://img.starcombats.com/programs/void.gif') {
+                            kitActive = true;
+                           } else {
+                            kitActive = false;
+                            break
+                           }
+                       }
+                    if(complect&&!kitActive){
+                        main.querySelector('#new_complects li:nth-child(1)').click();
                         setTimeout(()=>{
-                            resolve(true)}, 1522)
+                            resolve(true)}, 1322)
                     } else {
                         setTimeout(()=>{
                              main.getElementById('reload').click()
