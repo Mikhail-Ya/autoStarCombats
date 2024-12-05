@@ -124,9 +124,9 @@ function use_scroll(id) {
 }
 // "editor.unicodeHighlight.ambiguousCharacters": false 660 - 270 =  
 function injected_main(){
-    let abils50 = 80,
-    abils100 = 55,
-    abils200 = 60,
+    let abils50 = 110,
+    abils100 = 60,
+    abils200 = 30,
     gos = 0,
     euro = 0,
     stavim = 0,// каким ставим
@@ -135,7 +135,7 @@ function injected_main(){
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 9,
+    started = 29,
     main;
     const obnovScript = () => {
         main = document.getElementsByName('mainWindow')[0].contentDocument
@@ -173,8 +173,18 @@ function injected_main(){
             let podatString = podatKnop.textContent
             if(kol >= stavim && downup || !downup && kol === stavim || trigger && kol <= proba){
                 if(podatString === 'Подать заявку') {
-                    if(complect){
-                        main.getElementById('new_complects').querySelector('li:nth-child(4)').click();
+                    let plaginy = main.querySelectorAll('.viod img');
+                    let kitActive = Boolean;
+                       for (var pl = 0; pl < plaginy.length; pl++) {
+                           if (plaginy[pl].src !== 'http://img.starcombats.com/programs/void.gif') {
+                            kitActive = true;
+                           } else {
+                            kitActive = false;
+                            break
+                           }
+                       }
+                    if(complect&&!kitActive){
+                        main.querySelector('#new_complects li:nth-child(1)').click();
                         setTimeout(()=>{
                             resolve(true)}, 1522)
                     } else {
