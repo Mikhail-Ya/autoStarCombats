@@ -166,9 +166,9 @@ function use_scroll(id) {
 //28431(21.07)--28809(22.07)--29513(24.07)--29900(25.07)--31000(27.07)--32612(31.07)--34383(03.08)
 //--47065(30.08) --47824(31.08)
 function injected_main() {
-  let ispolzAbil50 = 80;
-  let ispolzAbil100 = 100;
-  let ispolzAbil200 = 70;
+  let abi_50 = 80;
+  let abi_100 = 100;
+  let abi_200 = 70;
   let abilkaGos = 0;
   let abilkaEkr = 0;
   let stoperInd = true;
@@ -176,7 +176,7 @@ function injected_main() {
   let povtorVrem = 24;
   let povtorVrem1 = 24;
   let last_minuty = 0;
-  let isklyuchit = [14, 7, 8]; // искинов какого уровня не ищем
+  let isklyuchit = [9, 7, 8]; // искинов какого уровня не ищем
   let iskDup = [15, 17, 18]; // какие искины ставятся третьими
   let limit = 23;
   let iskinLimit = "13";
@@ -468,7 +468,6 @@ function injected_main() {
     }
   };
   let useAnti = () => {
-    console.log("anti");
     let mainOk = document.getElementsByName("mainWindow")[0].contentDocument;
     mainOk.getElementById("img15").click();
     setTimeout(() => {
@@ -619,16 +618,17 @@ function injected_main() {
     var provPL = false;
     let provEnki = (provPL) => {
       if (provPL) {
-        let enkaIsk = main.getElementById("Venergy").getAttribute("width");
-        let enIsk = Number(enkaIsk);
         main = document.getElementsByName("mainWindow")[0].contentDocument;
+      let energy = main.getElementById("Venergytext").textContent.split('/').map(Number).reduce((a,b)=> a/b)
+      
+        
         main.getElementById("iskinButtonII").click();
         let scripts = main.getElementsByTagName("script").length;
         if (scripts < 9) {
           kontZamena();
           return;
         }
-        if (200 <= enIsk) {
+        if (0.9 <= energy) {
           setTimeout(() => {
             let main =
               document.getElementsByName("mainWindow")[0].contentDocument;
@@ -658,56 +658,23 @@ function injected_main() {
             (iskDup[1] === urovIs && 2 <= kol) ||
             (iskDup[2] === urovIs && 2 <= kol)
           ) {
-            var opredAbil = main.getElementById("iskin_level").textContent;
-            if ("4" === opredAbil || "18" === opredAbil) {
-              if (80 > ispolzAbil200) {
-                main.getElementById("img18").click();
-                ispolzAbil200++;
-              } else if (abilkaGos > 0) {
-                main.getElementById("scroll_365").click();
-                abilkaGos--;
-              } else if (abilkaEkr > 0) {
-                main.getElementById("scroll_586").click();
-                abilkaEkr--;
-              }
-            } else if (
-              "0" === opredAbil ||
-              "1" === opredAbil ||
-              "18" === opredAbil
-            ) {
-              if (75 > ispolzAbil50) {
-                main.getElementById("img16").click();
-                ispolzAbil50++;
-              } else if (130 > ispolzAbil100) {
-                main.getElementById("img17").click();
-                ispolzAbil100++;
-              } else if (80 > ispolzAbil200) {
-                main.getElementById("img18").click();
-                ispolzAbil200++;
-              } else if (abilkaGos > 0) {
-                main.getElementById("scroll_365").click();
-                abilkaGos--;
-              } else if (abilkaEkr > 0) {
-                main.getElementById("scroll_586").click();
-                abilkaEkr--;
-              }
-            } else {
-              if (130 > ispolzAbil100) {
-                main.getElementById("img17").click();
-                ispolzAbil100++;
-              } else if (ispolzAbil200 < 80) {
-                main.getElementById("img18").click();
-                ispolzAbil200++;
-              } else if (abilkaGos > 0) {
-                main.getElementById("scroll_365").click();
-                abilkaGos--;
-              } else if (abilkaEkr > 0) {
-                main.getElementById("scroll_586").click();
-                abilkaEkr--;
-              } else {
-                stoperInd = false;
-              }
-            }
+           let energy = main.getElementById("Venergytext").textContent.split('/').map(Number).reduce((a,b)=> b - a)
+             if(energy <= 50 && abi_50 < 80 ){
+               abi_50++;
+                main.getElementById('img16').click();
+             } else if (energy <= 100 && abi_100 < 130){
+               abi_100++;
+               main.getElementById('img17').click();
+             } else if (abi_200 <= 80){
+               abi_200++;
+               main.getElementById('img18').click();
+             } else if (abilkaGos > 0 ){
+               abilkaGos--;
+               main.getElementById('scroll_365').click();
+             } else if (abilkaEkr > 0 ){
+               abilkaEkr--;
+               main.getElementById('scroll_586').click();
+             }
             setTimeout(() => {
               main.getElementById("start_but").click();
 
@@ -717,7 +684,6 @@ function injected_main() {
               zapiska[urovIsk]++;
               if (urovIsk === iskinLimit) {
                 limit--;
-                console.log(urovIsk + " : лимит " + limit);
                 if (limit <= 0) {
                   isklyuchit[2] = Number(urovIsk);
                 }
@@ -779,7 +745,7 @@ function injected_main() {
       case "5":
         main
           .getElementById("new_complects")
-          .querySelector("li:nth-child(3)")
+          .querySelector("li:nth-child(2)")
           .click();
         setTimeout(provPlags, 1500 + timeRnd);
         break;
