@@ -56,59 +56,55 @@ function delete_scroll(id, new_name)
   
 }
 function injected_main(){
-        let testAuto = ()=>{
-                
-        let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-        
-        let iskomoe = new Array;
-        let iskomoeKol = 0;
-        let iskomoeName = 'Мультистрелок v3.0 CV';
-        let obshee = mainOkno.querySelectorAll('#type1_1 .item'); 
+      let iskomoe = new Array;
+      let iskomoeKol = 0;
+      let beginner = true;
+        function testAuto(){
+          let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+          console.log('test A')
+          
+          let iskomoeName = 'Мультистрелок v3.0 CV';
+          let obshee = mainOkno.querySelectorAll('#type1_1 .item'); 
               var script = document.createElement("script");
                   script.setAttribute("type", "text/javascript");
                   script.innerHTML = delete_scroll ;
                   mainOkno.getElementsByTagName('head')[0].appendChild(script);
 
-        for (var i = obshee.length - 1; i >= 0; i--) {
-
-          var block = obshee[i]
-          if (block.querySelector('h1').textContent === iskomoeName){
-            iskomoe.push(block);
-
-            iskomoeKol++}
-        }
-        let intervalDelet = setInterval(()=>{
-          if (iskomoeKol>0) {
-            var kont = iskomoe[iskomoeKol-1];
-            var delBtn = kont.querySelector('tr:nth-child(2) td:nth-child(4) img')
-            
-          } else {
-            let chatOkno = document.getElementsByName('chatWindow')[0].contentDocument
-                                                 let soobsheniya = chatOkno.getElementById('content_rus')
-                                                 let data = ' удалил контейнеры, было '+ iskomoe.length;
-                                                     var div = document.createElement("div");
-                                                         div.setAttribute("class", "postmessage");
-                                                         div.innerHTML = data;
-                                                         soobsheniya.appendChild(div) 
-            kolKont=iskomoeKol;
-            
-            
-            clearInterval(intervalDelet)
-            ostanov()
+          for (var i = obshee.length - 1; i >= 0; i--) {
+            var block = obshee[i]
+            if (block.querySelector('h1').textContent === iskomoeName){
+              iskomoe.push(block);
+              iskomoeKol++
+            }
           }
-          if (delBtn) {
-            iskomoeKol--;
-            console.log('удалил ' + delBtn.attributes[6].textContent);
-          delBtn.click()}
-        },2000)}
-        let ostanov=()=>{
-          let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
-        let navigBtn = panelMenu.querySelector('.right img:last-of-type')
-            navigBtn.click()
-          console.log('v ostanov')
+          if(iskomoe.length > 0 && beginner){
+            interDelet()
+             beginner = false
+          } 
         }
-        
-        setTimeout(testAuto,15000)
+        function interDelet (){ 
+            if (iskomoeKol > 0) {
+              var kont = iskomoe[iskomoeKol-1];
+              var delBtn = kont.querySelector('tr:nth-child(2) td:nth-child(4) img')
+            } else {
+              ostanov()
+              return
+            }
+            if (delBtn) {
+              iskomoeKol--;
+              delBtn.click()
+              clearTimeout()
+              setTimeout(interDelet,1800)
+            }
+        }
+        function ostanov(){
+          let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
+          let navigBtn = panelMenu.querySelector('.right img:last-of-type')
+            navigBtn.click()
+            console.log('v ostanov')
+          return
+        }
+      setTimeout(testAuto,15000)
 }
 /*
  * function put_gift(id, new_name, is_use, container_id, code)

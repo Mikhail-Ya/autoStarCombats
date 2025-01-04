@@ -5,7 +5,7 @@ function injected_main(){
   let propusk;
 //   let trigger1=false; 
 //   let dubleVert=0;
-//   let dubleGorez=0;
+//   let dubleGorez=0; 00:36:50
   let konecTime = 60;
         const deystvie =()=>{
                 let main_win = document.getElementsByName('mainWindow')[0].contentDocument,
@@ -19,7 +19,7 @@ function injected_main(){
                  gorizont='',
                  vertical='',
                  nomerSektor = '',
-                 centGor = 56,
+                 centGor = 55,
                  centVer = 5;
                 for (var i =0; i<= polSec.length - 1; i++) {
                       if (i===polSec.length-1) { 
@@ -189,19 +189,13 @@ function injected_main(){
             let obshiyCont = setInterval(()=>{
            
             let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-        //     let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
-        //     let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
             let idSector = main_win.getElementById("sector");
-        //     let triggerTrume = main_win.getElementById("inventory_current");
-        //     let triggerMost = main_win.getElementById("mostik");
             let time = Number(new Date().getMinutes());
                 if(konecTime===time){
                         top.location.href="/exit.php?1"
                         return
                 }
             if (null != idSector) {
-                
-                // let obnovRnd = Math.floor(Math.random()*1000)+1000;
                 if ( propusk <= 2){
                         
                     if (idSector.textContent===dubleSector) {

@@ -54,7 +54,6 @@ function use_complect() {
     req.send({ix: Math.random()});
 }
 
-
 function use_ability(position, data) {
     if (true) {
         if (abils[position]) {
@@ -124,19 +123,20 @@ function use_scroll(id) {
 }
 // "editor.unicodeHighlight.ambiguousCharacters": false 660 - 270 =  
 function injected_main(){
-    let abils50 = 110,
+    let abils50 = 115,
     abils100 = 60,
-    abils200 = 30,
+    abils200 = 40,
     gos = 0,
-    euro = 0,
-    stavim = 0,// каким ставим
+    euro = 0;
+    const stavim = 0,// каким ставим
     nonAbils = true,// ждать пока энка восстановится
-    complect = false,
+    complect = true,
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 29,
-    main;
+    started = 35;
+    const doptime = 200;
+    let main;
     const obnovScript = () => {
         main = document.getElementsByName('mainWindow')[0].contentDocument
         let scripts = main.getElementsByTagName('script').length    
@@ -150,7 +150,7 @@ function injected_main(){
         }
         setTimeout(()=>{
             resetMain()
-        },2500)
+        },2500+doptime)
     }
 
     const iskEnerg = () => {
@@ -161,7 +161,7 @@ function injected_main(){
                 main = document.getElementsByName('mainWindow')[0].contentDocument;
                 let enkaIsk = Number(main.getElementById('Venergy').getAttribute('width'))
                 if(enkaIsk > 200){ resolve(true) } else { resolve(false) }
-            },1220)})
+            },1220 + doptime)})
     }
     
     const iskRun =()=>{
@@ -186,13 +186,13 @@ function injected_main(){
                     if(complect&&!kitActive){
                         main.querySelector('#new_complects li:nth-child(1)').click();
                         setTimeout(()=>{
-                            resolve(true)}, 1522)
+                            resolve(true)}, 1522 + doptime)
                     } else {
                         setTimeout(()=>{
                              main.getElementById('reload').click()
                              main = document.getElementsByName('mainWindow')[0].contentDocument
                             resolve(true)
-                        },1245)
+                        },1245 + doptime)
                     }
                 } else {
                     resolve(false)
@@ -224,9 +224,9 @@ function injected_main(){
                         euro--
                     } else if(nonAbils){
                     }
-                       setTimeout(resolve,500)
+                       setTimeout(resolve,500 + doptime)
                     
-            },1654)
+            },1654 + doptime)
         })
     }
 
@@ -265,5 +265,5 @@ function injected_main(){
             clearInterval(zapusc)
             obnovScript()
             }
-     },2000)
+     },2000 + doptime)
 }

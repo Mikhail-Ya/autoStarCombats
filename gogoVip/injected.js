@@ -546,14 +546,10 @@ function injected_main(){
         },2230)
     }
     let teleporEnd =()=> {
-        let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-            let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
             let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
         let mostik = down_bar.getElementById('bridge_btn')
         mostik.click()
         setTimeout(() => {
-            let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
-            let chatBtnday = chat_top_win.getElementById('tabNameChat')
                 var main_win = document.getElementsByName('mainWindow')[0].contentDocument;
                 
                 var chansClick = main_win.getElementById('img22')
@@ -614,7 +610,6 @@ function injected_main(){
            
             let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
             let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
-            let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
             let idSector = main_win.getElementById("sector");
             let triggerTrume = main_win.getElementById("inventory_current");
             let triggerMost = main_win.getElementById("mostik");
@@ -631,7 +626,6 @@ function injected_main(){
                     }
                 
                 let checkAs = true;
-                let proigral = main_win.getElementById('loser').src;
                 if (astron) {
                         checkAs = false;
                         if (astron.src==='http://img.starcombats.com/map/obj/dron01.gif') {
@@ -724,8 +718,7 @@ function injected_main(){
                         } else if (locatSeych[1]==='Центральный Компьютер') {
                                 var loc3 = locationsMain[1]
                                 loc3.click()
-                        } else if (triggerComp.src==="http://img.starcombats.com/locations/computer/head_rus.jpg"
-) {
+                        } else if (triggerComp.src==="http://img.starcombats.com/locations/computer/head_rus.jpg") {
                              clearInterval(obshiyCont);
                              rubkaZadanie();   
                         } 

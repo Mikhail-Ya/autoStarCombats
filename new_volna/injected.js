@@ -1,8 +1,9 @@
 function injected_main() {
   let dubleSector,
     dubleSectorPoint = 0,
-    triggerB = 0;
-  let quest = 0; // 0 - волна, 1 - ледяное кольцо
+    triggerB = 0,
+    turn = 0;
+  let quest = 0; // 0 - волна, 1 - ледяное кольцо, 2 = Древние порталы;
   let hod = (dateInterval) => {
     clearInterval(dateInterval);
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
@@ -21,7 +22,7 @@ function injected_main() {
       dubleSectorPoint++;
     }
 
-    if (dubleSectorPoint < 2) {
+    if (dubleSectorPoint < 3) {
       if (quest === 0) {
         switch (sector) {
           case "41417S":
@@ -52,13 +53,61 @@ function injected_main() {
             dalshe.click();
             break;
         }
-      } else {
+      } else if (quest === 2) {
+        switch (sector) {
+          case "31298N":
+          case "36303E":
+          case "41298S":
+          case "36293W":
+            razvorot.click();
+            break;
+          case "36298E":
+            if (turn === 1) {
+              pravo.click();
+              turn = 0;
+            } else {
+              turn = 1;
+              dalshe.click();
+            }
+            break;
+          case "36298S":
+            if (turn === 1) {
+              levo.click();
+              turn = 0;
+            } else {
+              turn = 1;
+              dalshe.click();
+            }
+            break;
+          default:
+            dalshe.click();
+            break;
+        }
+      } else if (quest === 1) {
+        let imgObekt = [
+          mainOkno.getElementById("img_left"),
+          mainOkno.getElementById("img_right"),
+          mainOkno.getElementById("img_front"),
+        ];
+        if (
+          imgObekt[2].src === "http://img.starcombats.com/map/cor/front_on.gif"
+        ) {
+          dalshe.click();
+        } else if (
+          imgObekt[0].src === "http://img.starcombats.com/map/cor/left_on.gif"
+        ) {
+          levo.click();
+        } else if (
+          imgObekt[1].src === "http://img.starcombats.com/map/cor/right_on.gif"
+        ) {
+          pravo.click();
+        }
       }
     } else {
       dubleSectorPoint = 0;
       navigBtn.click();
     }
-    setTimeout(obnovit, 1000);
+    setTimeout(obnovit, 100);
   };
 
   let boy = (dateInterval) => {
@@ -126,12 +175,12 @@ function injected_main() {
         "#new_centerBlock_footer tr:nth-child(2) td:nth-child(2) img"
       );
       autoboy.click();
-      setTimeout(obnovit, obnovRn);
+      setTimeout(boy, obnovRn);
     }
   };
 
   let obnovit = () => {
-    let timeRand = Math.floor(Math.random() * 1000) + 4000;
+    let timeRand = Math.floor(Math.random() * 1000) + 3000;
     let dateInterval = setInterval(() => {
       let mainOkno =
           document.getElementsByName("mainWindow")[0].contentDocument,
@@ -152,12 +201,13 @@ function injected_main() {
               nonOblom.querySelector("img").src !==
                 "http://img.starcombats.com/map/obj/null_portal.gif" &&
               i < 2
-            ){
+            ) {
               oblomok = nonOblom.firstChild;
               break;
-            } else if (i>1) {
-            oblomok = nonOblom.firstChild;
-              break;}
+            } else if (i > 1) {
+              oblomok = nonOblom.firstChild;
+              break;
+            }
           }
         }
 
@@ -171,7 +221,7 @@ function injected_main() {
               mainOkno.getElementById("item1").click();
             }
             setTimeout(() => {
-              navigBtn.click();
+              //navigBtn.click();
               triggerB++;
             }, 1000);
           }, 1500);

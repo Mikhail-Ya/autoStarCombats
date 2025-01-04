@@ -466,9 +466,9 @@ function injected_main() {
   let dubleSector;
   let dubleSectorPoint = 0;
   // номер поискового 386
-  const poiskNom = 3; // номер поискового...
+  const poiskNom = 4; // номер поискового...
   const kakProhod = 1; // 1 = прохождение, 0 = дроп...
-  const limitKont = 35; // сколько контенеров по квету до обмена
+  const limitKont = 36; // сколько контенеров по квету до обмена
   let kolKont = 0;
   let trigger1 = 0;
   let trigger1_2 = 0;
@@ -691,11 +691,11 @@ function injected_main() {
             if (0 === trigger1) {
               levo.click();
               setTimeout(obnovit, 1500);
-              trigger1++;
+              trigger1 = 1;
             } else {
               pravo.click();
               setTimeout(obnovit, 1500);
-              trigger1--;
+              trigger1 = 0;
             }
             break;
           case "16169S":

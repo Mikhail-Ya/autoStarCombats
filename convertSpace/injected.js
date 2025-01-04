@@ -2,14 +2,16 @@
 function injected_main(){
        let mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
        let oknoOtscheta = mainOko.getElementById('infoWindow');
-       let triggerS = 1;
+       let triggerS = 600;
+       let timeRn = Math.floor(Math.random()*200);
+       let kolDoObnov = 0;
 
        let ustanovka=()=>{
-        let timeRn = Math.floor(Math.random()*1000);
-        mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
+        timeRn = Math.floor(Math.random()*1000);
+        let mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
         let elementsSbor = mainOko.querySelectorAll('#items_div img');
         let dropElements = mainOko.querySelectorAll('#trash_div tr td');
-            oknoOtscheta = mainOko.getElementById('infoWindow');
+        let oknoOtscheta = mainOko.getElementById('infoWindow');
         // СБОРКИ
         let krupDetal = elementsSbor[0];
         let stroyMod = elementsSbor[1];
@@ -26,16 +28,16 @@ function injected_main(){
 
         if (oknoOtscheta.style.visibility === 'visible') {
             let timeSborki = oknoOtscheta.querySelector('#infoWindowMessage');
-            if(timeSborki.textContent[0] === 'В'&&triggerS===0){
-                    setTimeout(()=>{
+            if(timeSborki.textContent[0] === 'В'){
+                setTimeout(()=>{
                     let inBut = oknoOtscheta.querySelector('#infoButton .infoBtn')
                     inBut.click()
                         setTimeout(()=>{
-                            triggerS = 1;
+                            clearTimeout();
                             ustanovka();
                         },timeRn+2000)
-                    },timeRn+1000)
-                }
+                },timeRn+1000)
+            }
         } else {
              if (znakDark>0&&znakSvet>0&&biocard>4&&krupDet>0){
                 stroyMod.click()
@@ -45,34 +47,38 @@ function injected_main(){
                     usingBtn.click();
                    
                     setTimeout(()=>{
-                       if (triggerS===1) { 
+                            triggerS = 595;
+                            clearTimeout(); 
                             otsled()
-                            }
                         },timeRn+2000);
                     
                 },timeRn+4000)
-            } else if (399<melDet) {
+            } else if(oblomAstron > 9 && oblomok > 9){
+                znakDarkGet.click()
+                setTimeout(()=>{
+                    mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
+                    let usingBtn = mainOko.querySelector('#but1');
+                    usingBtn.click();
+                    setTimeout(()=>{
+                        triggerS = 295
+                        clearTimeout();
+                        otsled()
+                },timeRn+2000);
+                    
+                },timeRn+4000)
+            } else  if (399<melDet) {
                 krupDetal.click()
                 setTimeout(()=>{
                     mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
                     let usingBtn = mainOko.querySelector('#but1');
                     usingBtn.click();
                     setTimeout(()=>{
-                       if (triggerS===1) {
-                        otsled()}
+                        setTimeout(()=>{
+                            triggerS = 595; 
+                            clearTimeout();
+                            otsled()
                         },timeRn+2000);
-                    
-                },timeRn+4000)
-            } else if(oblomAstron > 9 && oblomok > 9){
-                znakSvetGet.click()
-                setTimeout(()=>{
-                    mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
-                    let usingBtn = mainOko.querySelector('#but1');
-                    usingBtn.click();
-                    setTimeout(()=>{
-                       if (triggerS===1) {
-                        otsled()}
-                        },timeRn+2000);
+                },timeRn+2000);
                     
                 },timeRn+4000)
             } else {
@@ -80,45 +86,46 @@ function injected_main(){
             } 
         }
        }
-
+       
        let otsled=()=>{
-        let timeRnd = Math.floor(Math.random()*500);
-        let kolDoObnov = 0;
-
-        let intevalOtsled = setInterval(()=>{
             mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
             oknoOtscheta = mainOko.getElementById('infoWindow');
-            if (oknoOtscheta.style.visibility === 'visible') {
-                let timeSborki = oknoOtscheta.querySelector('#infoWindowMessage');
-                
-                if(timeSborki.textContent[0] === 'В'&&triggerS===0){
-                    setTimeout(()=>{
-                    let inBut = oknoOtscheta.querySelector('#infoButton .infoBtn')
-                    inBut.click()
-                        setTimeout(()=>{
-                            triggerS = 1;
-                            clearInterval(intevalOtsled)
-                            ustanovka();
-                        },timeRnd+2000)
-                    },timeRnd+1000)
-                } else if (timeSborki.textContent[0] === 'И'&&triggerS===1) {
-                    triggerS=0;
-                }
-                
-            } else {
-                clearInterval(intevalOtsled);
-                ustanovka();
-            }
-            if (kolDoObnov>=117){
+            if (kolDoObnov >= triggerS){
                 let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
                 panelMenu.querySelector('.right img:last-child').click();
                 kolDoObnov = 0;
+                let time = new Date().getMinutes()
+                console.log(time)
             } else {
+                let time = new Date().getMinutes()
+                console.log(time)
                 kolDoObnov++
             }
-            
-        },timeRnd+9900);
-        
+            if(mainOko.getElementById('newTableDescription')){
+                if (oknoOtscheta.style.visibility === 'visible') {
+                    let timeSborki = oknoOtscheta.querySelector('#infoWindowMessage');
+                
+                    if(timeSborki.textContent[0] === 'В'){
+                        setTimeout(()=>{
+                        let inBut = oknoOtscheta.querySelector('#infoButton .infoBtn')
+                        inBut.click()
+                            setTimeout(()=>{
+                                clearTimeout()
+                                ustanovka();
+                            },timeRn+2000)
+                        },timeRn+1000)
+                    } else if (timeSborki.textContent[0] === 'И') {
+                        clearTimeout();
+                        setTimeout(otsled,timeRn + 2000)
+                    }    
+                } else {
+                    clearTimeout();
+                    setTimeout(ustanovka,timeRn + 2000);
+                }
+            } else {
+                clearTimeout();
+                setTimeout(otsled,timeRn + 2000)
+            }
        }
        setTimeout(otsled,10000)
 }
