@@ -651,22 +651,22 @@ function reload()
 
 init();
 function injected_main(){
-    let abi_50 = 0;
-    let abi_100 = 0;
-    let abi_200 = 0;
-    let abilkaGos = 0;
-    let abilkaEkr = 0;
-    let stoperInd = true;
-    let zapiska = {'5':0,'6':0,'7':0,'8':0,'9':0}//список забегов искинов по порядку
-	let povtorVrem = 24;
-    let povtorVrem1 = 24;
-    let last_minuty = 0;
-    let isklyuchit = [14,17,18];// искинов какого уровня не ищем
-    let iskDup = [9,7,8];// какие искины ставятся третьими
-    let limit = 23;
-    let iskinLimit = '13';
-    let ustanovitAnti = false;
-
+    let abi_50 = 25,
+     abi_100 = 0,
+     abi_200 = 0,
+     abilkaGos = 0,
+     abilkaEkr = 0,
+	 povtorVrem = 24,
+     povtorVrem1 = 24,
+     last_minuty = 0;
+    const stoperInd = true,
+     iskDup = [9,7,8],// какие жуки бегают
+     ustanovitAnti = false,
+     installation = 1, // каким ставяться в заявку
+     limit_abil_50 = 115,
+     limit_abil_100 = 60,
+     limit_abil_200 = 40,
+     with_plugins = false;
     let perezIskin = 5;
 
     let boy=()=>{
@@ -968,7 +968,7 @@ function injected_main(){
             povtorVrem1 = vremya;
         }
         
-        let timeRnd = Math.floor(Math.random()*1000)+1500
+        let timeRnd = Math.floor(Math.random()*1000)+2500
         let obnovDate = setInterval(()=>{
             let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
         
@@ -979,32 +979,22 @@ function injected_main(){
                 let podatKnop = mainOkno.getElementById('start_but')
                 let podatString = podatKnop.textContent
         
-                if('Подать заявку'!==podatString&&1===kol||'Подать заявку'!==podatString&&2===kol){        
-                    podatKnop.click()
-                    clearInterval(obnovDate)        
-                    kontZamena()
-                    return;
-                }
-        
-                if (3===kol&&iskDup[1]===urovIs||3===kol&&iskDup[0]===urovIs||3===kol&&iskDup[2]===urovIs){
+                if (iskDup.includes(urovIs)&&installation <= kol && 'Подать заявку'===podatString
+                    ){ 
+                            console.log(iskDup.includes(urovIs)&&installation <= kol) 
 
-                }
-            
-                if (3===kol&&'Подать заявку'===podatString
-                    ||iskDup[0]===urovIs&&1<=kol&&'Подать заявку'===podatString
-                    ||iskDup[1]===urovIs&&1<=kol&&'Подать заявку'===podatString
-                    ||iskDup[2]===urovIs&&1<=kol&&'Подать заявку'===podatString){        
                     mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;        
                     let scripts = mainOkno.getElementsByTagName('script').length        
-                    if (scripts>9){       
-                        clearInterval(obnovDate)   
-                        proverka()      
-                    }else{      
-                        clearInterval(obnovDate)      
-                        kontZamena()}       
-                    } else if('Отозвать заявку'===podatString){
+                        if (scripts>9){       
+                            clearInterval(obnovDate)   
+                            proverka()      
+                        }else{      
+                            clearInterval(obnovDate)      
+                            kontZamena()
+                        }       
+                } else if('Отозвать заявку'===podatString){
        
-                    } else{
+                } else {
                         let iskinUrovList = mainOkno.querySelectorAll('.iskin__lvls-item-lvl')
                         let kolZayavka = mainOkno.querySelectorAll('.iskin__lvls-item-count')
                         let iscinPerekl = mainOkno.querySelectorAll('.iskin__tpl')
@@ -1014,40 +1004,34 @@ function injected_main(){
                         let kolZa = Number(kolZayavka[i].textContent)
                         for (let j = 0; j < iscinPerekl.length; j++) {
                             let juk = Number(iscinPerekl[j].textContent)
-                            if (kolZa === 3 && juk === urovIsk 
-                                && urovIsk !== isklyuchit[0]
-                                && urovIsk !== isklyuchit[1]
-                                && urovIsk !== isklyuchit[2]
-                                ||iskDup[0]===urovIsk&&1<=kolZa&& juk === urovIsk
-                                ||iskDup[1]===urovIsk&&1<=kolZa&& juk === urovIsk
-                                ||iskDup[2]===urovIsk&&1<=kolZa&& juk === urovIsk) {
+                            if (iskDup.includes(urovIsk)&&installation<=kolZa&& juk === urovIsk) {
                                posled = iscinPerekl[j]
                                break iskiny;
                             }
                             }
                         }
-                if (posled){
-                    posled.click()
+                    if (posled){
+                        posled.click()
                         clearInterval(obnovDate)
                         kontZamena()
-            }
-        }
-        }else if(mainOkno.getElementById('achange')) {    
-                                clearInterval(obnovDate)
-                                boy() 
+                    }
+                }
+            } else if (mainOkno.getElementById('achange')) {    
+                clearInterval(obnovDate)
+                boy() 
             } else if (mainOkno.getElementById('mostik')&&ustanovitAnti) {
                 clearInterval(obnovDate)
                 useAnti()
                 last_minuty=minuty; 
             }
-
-    },timeRnd)
+        },timeRnd)
     
     }
     let proverka = () => {
         let timeRnd = Math.floor(Math.random() * 500);
         let main = document.getElementsByName("mainWindow")[0].contentDocument;
         var provPL = false;
+        console.log('проверка')
         let provEnki = (provPL) => {
           if (provPL) {
             main = document.getElementsByName("mainWindow")[0].contentDocument;
@@ -1064,13 +1048,9 @@ function injected_main(){
               setTimeout(() => {
                 let main =
                   document.getElementsByName("mainWindow")[0].contentDocument;
-                let kol = main.getElementById("total_req").textContent;
+                let kol = Number(main.getElementById("total_req").textContent);
                 let urovIs = Number(main.getElementById("iskin_level").textContent);
-                if (
-                  "3" === kol ||
-                  (iskDup[0] === urovIs && "1" === kol) ||
-                  (iskDup[1] === urovIs && "1" === kol) ||
-                  (iskDup[2] === urovIs && "1" === kol)
+                if (installation <= kol && iskDup.includes(urovIs)
                 ) {
                   main.getElementById("start_but").click();
                 }
@@ -1079,24 +1059,19 @@ function injected_main(){
             } else {
               let main =
                 document.getElementsByName("mainWindow")[0].contentDocument;
-              let kol = main.getElementById("total_req").textContent;
+              let kol = Number(main.getElementById("total_req").textContent);
               let urovIs = Number(main.getElementById("iskin_level").textContent);
-              if (
-                "3" === kol ||
-                (iskDup[0] === urovIs && '1' <= kol) ||
-                (iskDup[1] === urovIs && '1' <= kol) ||
-                (iskDup[2] === urovIs && '1' <= kol)
-              ) {
+              if (installation <= kol && iskDup.includes(urovIs)) {
                 
                let energy = main.getElementById("Venergytext").textContent.split('/').map(Number).reduce((a,b)=> b - a); 
                let proc = main.getElementById("Venergytext").textContent.split('/').map(Number)[1]*0.1;
-                 if(energy - proc <= 50 && abi_50 < 110 ){
+                 if(energy - proc <= 50 && abi_50 < limit_abil_50 ){
                    abi_50++;
                     main.getElementById('img16').click();
-                 } else if (energy - proc <= 100 && abi_100 < 60){
+                 } else if (energy - proc <= 100 && abi_100 < limit_abil_100){
                    abi_100++;
                    main.getElementById('img17').click();
-                 } else if (abi_200 < 40){
+                 } else if (abi_200 < limit_abil_200){
                    abi_200++;
                    main.getElementById('img18').click();
                  } else if (abilkaGos > 0 ){
@@ -1108,13 +1083,6 @@ function injected_main(){
                  }
                 setTimeout(() => {
                   main.getElementById("start_but").click();
-                  zapiska[urovIsk]++;
-                  if (urovIsk === iskinLimit) {
-                    limit--;
-                    if (limit <= 0) {
-                      isklyuchit[2] = Number(urovIsk);
-                    }
-                  }
                 }, 400);
               }
               if (stoperInd) {
@@ -1153,11 +1121,15 @@ function injected_main(){
         }
         switch (urovIsk) {
           case "7":
-            
+            if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(3)").click();
+            setTimeout(provPlags, 1500 + timeRnd);
+            break;
+          case "8":
+            if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(4)").click();
             setTimeout(provPlags, 1500 + timeRnd);
             break;
           case "9":
-           
+            if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(5)").click();
             setTimeout(provPlags, 1500 + timeRnd);
             break;
           default:
@@ -1185,7 +1157,7 @@ function injected_main(){
                 let kol = Number(mainOkno.getElementById('total_req').textContent)
                let urovIs = Number(mainOkno.getElementById('iskin_level').textContent)
 
-                   if (3===kol || iskDup[0]===urovIs && 2<=kol || iskDup[1]===urovIs && 2<=kol || iskDup[2]===urovIs && 2<=kol) {
+                   if (installation <= kol && iskDup.includes(urovIs)) {
                        proverka()
                    } else {
                        dannye()
