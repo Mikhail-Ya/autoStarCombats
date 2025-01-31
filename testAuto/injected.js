@@ -175,7 +175,7 @@ function injected_main(){
   const programs_name = ['Миниверфь','Минибокс'],
         complect_light = 4,
         complect_max = 1,
-        number_of_uses = 15;
+        number_of_uses = 600;
   let uses = 0;
           let timeRdn = Math.floor(Math.random()*2000)
           let smeKomplect=()=>{
@@ -188,14 +188,11 @@ function injected_main(){
                   script.innerHTML = put_scroll + '; ' + put_complect;
                   trumOkno.getElementsByTagName('head')[0].appendChild(script);
             }
-              complAll[complect_light-1].querySelector('a').click()
-
-            
-              setTimeout(()=>{
-              complAll[complect_max-1].querySelector('a').click()
-              useHilk()
+            complAll[complect_light-1].querySelector('a').click()
+            setTimeout(()=>{
+                complAll[complect_max-1].querySelector('a').click()
+                useHilk()
             },timeRdn+5000)
-            
           }
           let useHilk =()=>{
             let trumOkno = document.getElementsByName('mainWindow')[0].contentDocument;
@@ -215,15 +212,19 @@ function injected_main(){
                 let hpPers = menu_win.querySelector('#hptext').textContent.split('/').map(Number).reduce((a,b)=>b - a)
                 trumOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                 let obshee = trumOkno.querySelectorAll('.item');
+                let sum_use = 0;
                 let iskomoe = new Array;
-                for (var i = 0; i < obshee.length; i++) {
-                  var block = obshee[i]
-                  if (programs_name.includes(block.querySelector('h1').textContent)){
-                     iskomoe.push(block);
+                for (let el of obshee) {
+                  if (programs_name.includes(el.querySelector('h1').textContent)){
+                    
+                    if(sum_use < (number_of_uses - uses)){ 
+                      iskomoe.push(el)
+                      sum_use += el.querySelector('h2').textContent.match(/\d/g).map(Number).reduce((a,b)=>b-a) 
+                    } else { break };
                    }
                 }
                 iskomoeKol=iskomoe.length;
-                dolgovech = Number(iskomoe[iskomoeKol-1].querySelector('h2').textContent[15])
+                dolgovech = 0 //Number(iskomoe[iskomoeKol-1].querySelector('h2').textContent[15])
                 trumOkno.querySelector('.infoBtn').click();
                 let healphy = 0
                 let intervalUsing = setInterval(()=>{
@@ -231,15 +232,15 @@ function injected_main(){
                   // const windowMessage = main.querySelector('#infoWindowMessage');
                   
                   if (main.querySelector('#infoWindow').style.visibility === 'visible'){
-                     healphy = Number(main.querySelector('#infoWindowMessage').textContent.split(' ').filter((a)=>/[0-9]/.test(a)))
+                     healphy = Number(main.querySelector('#infoWindowMessage').textContent.match(/\d/g))
                      hpPers -= healphy
                      
                   }
-                  if ((hpPers - healphy) > 0 && iskomoeKol>=1 && uses <= number_of_uses ) {
+                  if ((hpPers - healphy) > 0 && iskomoeKol>=1 && uses < number_of_uses ) {
                     uses++
                     let kont = iskomoe[iskomoeKol-1];
-                    if (kont.querySelector('h2').textContent.split('').filter((a)=>/[0-9]/.test(a)).map(Number).reduce((a,b)=>b-a)>dolgovech){
-                      console.log(kont.querySelector('h2').textContent.split('').filter((a)=>/[0-9]/.test(a)).map(Number).reduce((a,b)=>b-a))
+                    if (kont.querySelector('h2').textContent.match(/\d/g).map(Number).reduce((a,b)=>b-a) - dolgovech){
+
                       kont.querySelector('tr:nth-of-type(2) td:nth-of-type(2) img').click()
                         setTimeout(()=>{
                           trumOkno = document.getElementsByName('mainWindow')[0].contentDocument;
@@ -251,15 +252,15 @@ function injected_main(){
                       iskomoeKol--
                       dolgovech=0
                     }
-                  } else if (iskomoeKol>=1 && uses <= number_of_uses ) {
+                  } else if (iskomoeKol>=1 && uses < number_of_uses ) {
                     clearInterval(intervalUsing)
                     smeKomplect()
                   } else {
-                    console.log('закончились')
+                    console.log('done')
                     clearInterval(intervalUsing)
                   }
                   
-                },timeRdn+3000)
+                },timeRdn+4000)
               },timeRdn+3000)
               clearTimeout(timeObl)
             },timeRdn+5000)
@@ -268,90 +269,6 @@ function injected_main(){
         
         setTimeout(smeKomplect,10000)
 }
-/*function injected_main_new(){
-  const programs_name = ['Миниверфь','Минибокс'];
-    function getMainWin(){
-      let main = document.getElementsByName('mainWindow')[0].contentDocument;
-      return main
-    }
-    const  toggleKit = async () => {
-      let trume = document.getElementsByName('mainWindow')[0].contentDocument
-      const scriptsKol = trume.querySelectorAll('script').length;
-      
-      if(scriptsKol<9) {
-        var script = document.createElement("script");
-        script.setAttribute("type", "text/javascript");
-        script.innerHTML = put_scroll + '; ' + put_complect;
-        trume.getElementsByTagName('head')[0].appendChild(script);
-      }
-        let rest = await putMiniKit();
-        rest = await putPortion();
-        setTimeout(usePrograms,3000)
-    }
-
-    function putMiniKit(){
-        return new Promise((resolve)=>{
-          let main = document.getElementsByName('mainWindow')[0].contentDocument;
-          const complAll = main.querySelectorAll('#inner_complect tr');
-           complAll[2].querySelector('a').click();
-          setTimeout(()=>{
-            complAll[0].querySelector('a').click();
-            setTimeout(()=>{
-              resolve(true)
-            },1210)
-          },1220)
-          })
-    }
-    function putPortion(){
-      return new Promise((resolve)=>{
-          getMainWin().querySelector('.cats a:nth-of-type(2)').click();
-        setTimeout(()=>{
-          getMainWin().querySelector('#group2 table:nth-of-type(3) a').click();
-          resolve(true)
-        },1305)
-      })
-    }
-    function checkingSelect() {
-      return new Promise(()=>{
-        
-      })
-    }
-    function awaitMessage () {
-      return new Promise(()=>{
-        const reviewMess = setInterval(()=>{
-          let main = document.getElementsByName('mainWindow')[0].contentDocument;
-          const windowMessage = main.querySelector('#infoWindowMessage')
-
-        },1020)
-      })
-      
-    }
-    
-    function repairPrograms () {
-      return new Promise((res)=>{
-          let main = document.getElementsByName('mainWindow')[0].contentDocument;
-          let obshee = main.querySelectorAll('.item');
-          let iskomoe = new Array;
-                for (var i = 0; i < obshee.length; i++) {
-                  var block = obshee[i]
-                  if (programs_name.includes(block.querySelector('h1').textContent)){
-                     iskomoe.push(block);
-                   }
-                }
-          res(iskomoe)
-        })
-    }
-    const usePrograms = async () => {
-        let arrPrograms = await repairPrograms()
-        console.log(arrPrograms)
-    }
-    function use_program (arr) {
-      return new Promise((res)=>{
-        let limit_use = 20
-      })
-    }
-    setTimeout(toggleKit,10000)
-}*/
 /*
  * function put_gift(id, new_name, is_use, container_id, code)
 {
