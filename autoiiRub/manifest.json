@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "iskinyRub",
-  "version": "1.0",
+  "name": "Забеги Жуков с ботами",
+  "version": "2.0",
   "content_scripts": [
     {
       "matches": [ "http://foggystation.starcombats.com/main*" ],
