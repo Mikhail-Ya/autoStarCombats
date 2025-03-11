@@ -19,8 +19,8 @@ function injected_main(){
                  gorizont='',
                  vertical='',
                  nomerSektor = '',
-                 centGor = 55,
-                 centVer = 5;
+                 centGor = 54,
+                 centVer = 4;
                 for (var i =0; i<= polSec.length - 1; i++) {
                       if (i===polSec.length-1) { 
                         napravlenie = polSec[i]
@@ -131,6 +131,8 @@ function injected_main(){
                                         dalshe.click()
                                 } else if (gorizont>centGor&&levo) {
                                         vLevo.click()
+                                } else if (gorizont<centVer&&!pravo&&pryamo) {
+                                        dalshe.click()
                                 } else if (gorizont<centGor&&pravo) {
                                         vPravo.click()
                                 } else if(!levo&&!pravo){
@@ -157,6 +159,8 @@ function injected_main(){
                                         dalshe.click()
                                 } else if (gorizont<centGor&&levo) {
                                         vLevo.click()
+                                } else if (gorizont<centVer&&!pravo&&pryamo) {
+                                        dalshe.click()
                                 } else if (gorizont>centGor&&pravo) {
                                         vPravo.click()
                                 } else if(!levo&&!pravo){
@@ -185,9 +189,8 @@ function injected_main(){
                 obrabotka()
         }
         const obrabotka =()=>{
-        let interRnd = Math.floor(Math.random()*1000)+3800;
+        let interRnd = Math.floor(Math.random()*1000)+3000;
             let obshiyCont = setInterval(()=>{
-           
             let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
             let idSector = main_win.getElementById("sector");
             let time = Number(new Date().getMinutes());

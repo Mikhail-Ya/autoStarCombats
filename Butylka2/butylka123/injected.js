@@ -400,14 +400,14 @@ function show_info(self)
 
 
 function injected_main(){
-    let hil5000 = 10;
+    let hil5000 = 0;
     let hil3000 = 0;
     let shansInd = 0;
     let dubleSector='';
     let propusk = 0;
     let krugi = 7;
     let kolBoy = 0;
-    let trigger1=0;
+    // let trigger1=0;
     let triggerB=0;
     let perUzel = 0;
     let vtoroyUzel = 0;
@@ -416,7 +416,7 @@ function injected_main(){
         let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
             let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
             let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
-        if (9 >= shansInd) {
+        if (12 >= shansInd) {
             let mostik = down_bar.getElementById('bridge_btn')
             mostik.click()
             setTimeout(() => {
@@ -443,7 +443,7 @@ function injected_main(){
         } 
     }
 
-    let hilka =()=> {
+    const hilka =()=> {
         let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
             let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
             let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
@@ -494,7 +494,7 @@ function injected_main(){
         }, 10000)
     }
 
-    let boy=()=>{
+    const boy=()=>{
                 triggerB=0
                 let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                 let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
@@ -510,7 +510,7 @@ function injected_main(){
                 let messageOkno = mainOkno.getElementById('infoWindow');
                 let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
                 let chatBtnday = chat_top_win.getElementById('tabNameChat')
-                let obnovRn = Math.floor(Math.random()*2000)+2000;
+                let obnovRn = Math.floor(Math.random()*1500)+1500;
             if(!mainOkno.getElementById('achange')){
                 // panelMenu.querySelector('.right img:last-child').click()
                 setTimeout(obrabotka,1000+obnovRn)
@@ -518,36 +518,27 @@ function injected_main(){
             }
             if(messageOkno&&messageOkno.style.visibility === "visible"){
                 let textInfoWin = mainOkno.getElementById('infoWindowMessage').textContent
-                let viborkaTexta = ""
-
-                for (let t=0;t<2;t++){
-                    viborkaTexta = viborkaTexta + textInfoWin[t]
-                }
+                let viborkaTexta = textInfoWin?.split(' ', 1).join();
                 
                 switch (viborkaTexta) {
-                    case "Бо":
+                    case "Бой":
                         panelMenu.querySelector('.right img:last-child').click()
                         setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                        setTimeout(obrabotka,1000+obnovRn)
+                        setTimeout(obrabotka,300+obnovRn)
                         break
                     case "Вы":
                         panelMenu.querySelector('.right img:last-child').click()
                         setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                        setTimeout(obrabotka,1000+obnovRn)
+                        setTimeout(obrabotka,300+obnovRn)
                         break
-                    case "Ис":
+                    case "Использование":
                         let autoboy = mainOkno.querySelector('#new_centerBlock_footer tr:nth-child(2) td:nth-child(2) img')
                         autoboy.click()
                         setTimeout(boy,obnovRn)
                         break
-                    case "Ож":
+                    case "Ожидание":
                         panelMenu.querySelector('.right img:last-child').click()
-                        setTimeout(boy,1000+obnovRn)
-                        break
-                    case "Пе":
-                        mainOkno.querySelector('.infobtn').click()
-                        panelMenu.querySelector('.right img:last-child').click()
-                        setTimeout(obrabotka,1000+obnovRn)
+                        setTimeout(boy,obnovRn)
                         break
                     default:
                         panelMenu.querySelector('.right img:last-child').click()
@@ -589,14 +580,15 @@ function injected_main(){
                          let perezagruz = mainOkno.querySelector('#ability3 a');
                          mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                          activPer = mainOkno.getElementById('reboot');
-                        if (perezagruz&& activPer && activPer.style.display!=='block') {
+                        if (perezagruz && activPer?.style?.display !== 'block') {
                             perezagruz.click()
                         }
                         setTimeout(()=>{
                             if(messageOkno.style.visibility!=="visible"){
-                                mainOkno.querySelector('#new_centerBlock_footer img:first-child').click()}
+                                mainOkno.querySelector('#new_centerBlock_footer img:first-child').click()
+                            }
+                            boy()
                         },500)
-                        boy()
                     },obnovRn)
                 }
         }
@@ -618,7 +610,7 @@ function injected_main(){
                 } else if(dubleSector === '2450S'){ krugi++} else if (dubleSector!==idSector.textContent) {
                         propusk=0;
                 };
-                let obnovRnd = Math.floor(Math.random()*2000)+1500;
+                let obnovRnd = Math.floor(Math.random()*800)+1800;
                 if (propusk <= 2){
                     
                     dubleSector = idSector.innerText
@@ -726,12 +718,13 @@ function injected_main(){
                                 }else{
                                     dalshe.click()
                                     vtoroyUzel--
-                                    if(vtoroyUzel<0){vtoroyUzel=0}}
-                                    setTimeout(dvijenie,3000+obnovRnd)
+                                    if(vtoroyUzel<0){vtoroyUzel=0}
+                                }
+                                setTimeout(dvijenie,3000+obnovRnd)
                                 break
                             case '7454S':
                             case '6456E':
-                            case '5460S':
+                            case '8460S':
                                 razvorot.click()
                                 setTimeout(dvijenie,obnovRnd)
                                 break
@@ -757,7 +750,7 @@ function injected_main(){
     function obrabotka (){
            let vremyaMin = Number(new Date().getMinutes())
            let vremyaChas = Number(new Date().getHours())
-           if( 22 === vremyaChas && 0 === vremyaMin){
+           if( 5 === vremyaChas && 0 === vremyaMin){
                hil5000 = 0;
                hil3000 = 0;
            } else if (8 === vremyaChas && 0 === vremyaMin){
@@ -794,7 +787,7 @@ function injected_main(){
                             let navigBtn = menu_win.querySelector('.right img:last-of-type')
                             kolBoy++
                             navigBtn.click()
-                            setTimeout(boy,3000)
+                            setTimeout(boy,2000)
                         },1000)
                         
                 } else {

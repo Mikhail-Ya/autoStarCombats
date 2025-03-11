@@ -166,9 +166,9 @@ function use_scroll(id) {
 //28431(21.07)--28809(22.07)--29513(24.07)--29900(25.07)--31000(27.07)--32612(31.07)--34383(03.08)
 //--47065(30.08) --47824(31.08)
 function injected_main() {
-  let abi_50 = 0;
-  let abi_100 = 0;
-  let abi_200 = 0;
+  let abi_50 = 3;
+  let abi_100 = 10;
+  let abi_200 = 1;
   let abilkaGos = 0;
   let abilkaEkr = 0;
   let stoperInd = true;
@@ -176,7 +176,7 @@ function injected_main() {
   let povtorVrem = 24;
   let povtorVrem1 = 24;
   let last_minuty = 0;
-  let isklyuchit = [19, 17, 18]; // искинов какого уровня не ищем
+  let isklyuchit = [19, 7, 18]; // искинов какого уровня не ищем
   let iskDup = [15, 17, 18]; // какие искины ставятся третьими
   let limit = 23;
   let iskinLimit = "13";
@@ -733,6 +733,13 @@ function injected_main() {
       main.getElementsByTagName("body")[0].appendChild(script);
     }
     switch (urovIsk) {
+      case "11":
+        main
+          .getElementById("new_complects")
+          .querySelector("li:nth-child(1)")
+          .click();
+        setTimeout(provPlags, 1500 + timeRnd);
+        break;
       case "6":
         main
           .getElementById("new_complects")
@@ -745,16 +752,9 @@ function injected_main() {
           .getElementById("new_complects")
           .querySelector("li:nth-child(3)")
           .click();
-        setTimeout(provPlags, 1500 + timeRnd);
-        break;
-      case "8":
-        main
-          .getElementById("new_complects")
-          .querySelector("li:nth-child(4)")
-          .click();
         setTimeout(provPlags, 2500 + timeRnd);
         break;
-      case "6":
+      case "8":
         main
           .getElementById("new_complects")
           .querySelector("li:nth-child(4)")

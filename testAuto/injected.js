@@ -174,7 +174,7 @@ function put_scroll(id, new_name, is_use, container_id, code)
 function injected_main(){
   const programs_name = ['Миниверфь','Минибокс'],
         complect_light = 4,
-        complect_max = 1,
+        complect_max = 7,
         number_of_uses = 600;
   let uses = 0;
           let timeRdn = Math.floor(Math.random()*2000)
@@ -229,12 +229,9 @@ function injected_main(){
                 let healphy = 0
                 let intervalUsing = setInterval(()=>{
                   let main = document.getElementsByName('mainWindow')[0].contentDocument;
-                  // const windowMessage = main.querySelector('#infoWindowMessage');
-                  
                   if (main.querySelector('#infoWindow').style.visibility === 'visible'){
-                     healphy = Number(main.querySelector('#infoWindowMessage').textContent.match(/\d/g))
-                     hpPers -= healphy
-                     
+                     healphy = Number(main.querySelector('#infoWindowMessage')?.textContent.match(/\d/g)?.join(''))
+                     hpPers -= healphy | 0
                   }
                   if ((hpPers - healphy) > 0 && iskomoeKol>=1 && uses < number_of_uses ) {
                     uses++

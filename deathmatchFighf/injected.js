@@ -489,8 +489,8 @@ function injected_main(){
                 let messageOkno = main_win.getElementById('infoWindow');
                 let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
                 let chatBtnday = chat_top_win.getElementById('tabNameChat')
-                let obnovRn = Math.floor(Math.random()*500)+2000;
-                if(messageOkno&&messageOkno.style.visibility === "visible"){
+                let obnovRn = Math.floor(Math.random()*500)+1700;
+            if(messageOkno&&messageOkno.style.visibility === "visible"){
                 let textInfoWin = main_win.getElementById('infoWindowMessage').textContent
                 let viborkaTexta = ""
 
@@ -504,17 +504,7 @@ function injected_main(){
                         setTimeout(()=>{chatBtnday.click()}, obnovRn)
                         setTimeout(obrabotka,obnovRn)
                         break
-                    case "Вы":
-                        panelMenu.querySelector('.right img:last-child').click()
-                        setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                        setTimeout(obrabotka,obnovRn)
-                        break
                     case "Ож":
-                        panelMenu.querySelector('.right img:last-child').click()
-                        setTimeout(obrabotka,obnovRn)
-                        break
-                    case "Пе":
-                        main_win.querySelector('.infobtn').click()
                         panelMenu.querySelector('.right img:last-child').click()
                         setTimeout(obrabotka,obnovRn)
                         break
@@ -526,9 +516,12 @@ function injected_main(){
                 }
             } else {
                         let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-                                vipset.click() 
-                        setTimeout(obrabotka,obnovRn)
-                } 
+                                vipset?.click() 
+                        if(main_win.getElementById('achange')) {  
+                                setTimeout(autoBoy,obnovRn)
+                        } else { 
+                                setTimeout(obrabotka,obnovRn) } 
+           } 
         }
         const deystvie =()=>{
                 let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
@@ -546,21 +539,17 @@ function injected_main(){
                 }
         }
         const obrabotka =()=>{
-        let interRnd = Math.floor(Math.random()*1000)+1500;
-       let obshiyCont = setInterval(()=>{
+        let interRnd = Math.floor(Math.random()*500)+1500;
+        let obshiyCont = setInterval(()=>{
                 let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
                 if (main_win.querySelectorAll('script').length<9){
-                var script = document.createElement("script");
+                let script = document.createElement("script");
                 script.setAttribute("type", "text/javascript");
                 script.innerHTML = use_action+'; ' + pers_attack ; 
-                main_win.getElementsByTagName('body')[0].appendChild(script);
+                main_win.getElementsByTagName('body')[0]?.appendChild(script);
                 }
-            
             let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
-            let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
             let idSector = main_win.getElementById("sector");
-            let triggerTrume = main_win.getElementById("inventory_current");
-            let triggerMost = main_win.getElementById("mostik");
 
             if (null != idSector) {
                let oblomki = [main_win.querySelector('#obj_left'),
@@ -590,18 +579,14 @@ function injected_main(){
                     }
 
                 
-                let obnovRnd = Math.floor(Math.random()*700)+200;
+                let obnovRnd = Math.floor(Math.random()*200)+500;
                 if (checkAs){
                         dubleSector = idSector;
                     if (idSector===dubleSector) {
                         propusk++
                     }
                     let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-                let vLevo = main_win.getElementById('left')
-                let vPravo = main_win.getElementById('right')
-               
                         main_win.getElementById('refresh').click()
-        
                 } else if(oblomok){
                         oblomok.click()
                         setTimeout(()=>{
@@ -612,11 +597,10 @@ function injected_main(){
                                         let navigBtn = menu_win.querySelector('.right img:last-of-type')
                                                 navigBtn.click()
                                         },200) 
-                                } else if (main_win.getElementById('use_div').style.visibility ==='visible'){
+                                } else if (main_win.getElementById('use_div')?.style?.visibility ==='visible'){
                                         main_win.getElementById('item1').click()
                                         main_win.getElementById('refresh').click()
-                                } else { main_win.getElementById('refresh').click()}
-
+                                } else { main_win?.getElementById('refresh')?.click()}
                         },obnovRnd)
                 } else { main_win.getElementById('refresh').click()}
             } else if(main_win.getElementById('achange')) {    

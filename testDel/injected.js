@@ -61,7 +61,6 @@ function injected_main(){
       let beginner = true;
         function testAuto(){
           let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-          console.log('test A')
           
           let iskomoeName = 'Мультистрелок v3.0 CV';
           let obshee = mainOkno.querySelectorAll('#type1_1 .item'); 
@@ -94,14 +93,13 @@ function injected_main(){
               iskomoeKol--;
               delBtn.click()
               clearTimeout()
-              setTimeout(interDelet,1800)
+              setTimeout(interDelet,1500)
             }
         }
         function ostanov(){
           let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
           let navigBtn = panelMenu.querySelector('.right img:last-of-type')
             navigBtn.click()
-            console.log('v ostanov')
           return
         }
       setTimeout(testAuto,15000)

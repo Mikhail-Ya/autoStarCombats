@@ -651,8 +651,8 @@ function reload()
 
 init();
 function injected_main(){
-    let abi_50 = 25,
-     abi_100 = 0,
+    let abi_50 = 54,
+     abi_100 = 9,
      abi_200 = 0,
      abilkaGos = 0,
      abilkaEkr = 0,
@@ -660,14 +660,16 @@ function injected_main(){
      povtorVrem1 = 24,
      last_minuty = 0;
     const stoperInd = true,
-     iskDup = [9,7,8],// какие жуки бегают
+     iskDup = [9,8],// какие жуки бегают
      ustanovitAnti = false,
-     installation = 1, // каким ставяться в заявку
-     limit_abil_50 = 115,
+     installation = 0, // каким ставяться в заявку
+     limit_abil_50 = 120,
      limit_abil_100 = 60,
      limit_abil_200 = 40,
-     with_plugins = false;
-    let perezIskin = 5;
+     with_plugins = false,
+     over_time = 1500;
+
+    let perezIskin = 0;
 
     let boy=()=>{
 
@@ -875,7 +877,7 @@ function injected_main(){
                 let messageOkno = mainOkno.getElementById('infoWindow');
                 let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
                 let chatBtnday = chat_top_win.getElementById('tabNameChat')
-                let obnovRn = Math.floor(Math.random()*500)+1000;
+                let obnovRn = Math.floor(Math.random()*500)+over_time;
                 if(messageOkno&&messageOkno.style.visibility === "visible"){
                     let textInfoWin = mainOkno.getElementById('infoWindowMessage').textContent
                     let viborkaTexta = ""
@@ -883,16 +885,6 @@ function injected_main(){
                         viborkaTexta = viborkaTexta + textInfoWin[t]
                     }
                     switch (viborkaTexta) {
-                        case "Бо":
-                            panelMenu.querySelector('.right img:last-child').click()
-                            setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                            setTimeout(dannye,obnovRn)
-                            break
-                        case "Вы":
-                            panelMenu.querySelector('.right img:last-child').click()
-                            setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                            setTimeout(dannye,obnovRn)
-                            break
                         case "Ис":
                             let autoboy = mainOkno.querySelector('#new_centerBlock_footer tr:nth-child(2) td:nth-child(2) img')
                             autoboy.click()
@@ -932,7 +924,6 @@ function injected_main(){
                 }
         }
     let useAnti=()=>{
-        console.log('anti')
         let mainOk = document.getElementsByName('mainWindow')[0].contentDocument;
         mainOk.getElementById('img15').click()
         setTimeout(()=>{
@@ -947,9 +938,7 @@ function injected_main(){
     }
     let dannye=()=>{
         let vremya = Number(new Date().getHours())
-        let minuty = Number(new Date().getMinutes())
-        
-        
+        let minuty = Number(new Date().getMinutes()) 
 	    if (povtorVrem !== vremya){
 		    if (25 === vremya){
                 ispolzAbil100 = 0;
@@ -968,7 +957,7 @@ function injected_main(){
             povtorVrem1 = vremya;
         }
         
-        let timeRnd = Math.floor(Math.random()*1000)+2500
+        let timeRnd = Math.floor(Math.random()*1000)+over_time+2000
         let obnovDate = setInterval(()=>{
             let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
         
@@ -979,10 +968,7 @@ function injected_main(){
                 let podatKnop = mainOkno.getElementById('start_but')
                 let podatString = podatKnop.textContent
         
-                if (iskDup.includes(urovIs)&&installation <= kol && 'Подать заявку'===podatString
-                    ){ 
-                            console.log(iskDup.includes(urovIs)&&installation <= kol) 
-
+                if (iskDup.includes(urovIs)&&installation <= kol && 'Подать заявку'===podatString){ 
                     mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;        
                     let scripts = mainOkno.getElementsByTagName('script').length        
                         if (scripts>9){       
@@ -1028,10 +1014,9 @@ function injected_main(){
     
     }
     let proverka = () => {
-        let timeRnd = Math.floor(Math.random() * 500);
+        let timeRnd = Math.floor(Math.random() * 500)+over_time;
         let main = document.getElementsByName("mainWindow")[0].contentDocument;
         var provPL = false;
-        console.log('проверка')
         let provEnki = (provPL) => {
           if (provPL) {
             main = document.getElementsByName("mainWindow")[0].contentDocument;
@@ -1055,7 +1040,7 @@ function injected_main(){
                   main.getElementById("start_but").click();
                 }
               }, 500);
-              setTimeout(dannye, 1000 + timeRnd);
+              setTimeout(dannye,timeRnd+over_time);
             } else {
               let main =
                 document.getElementsByName("mainWindow")[0].contentDocument;
@@ -1083,10 +1068,10 @@ function injected_main(){
                  }
                 setTimeout(() => {
                   main.getElementById("start_but").click();
-                }, 400);
+                }, timeRnd);
               }
               if (stoperInd) {
-                setTimeout(dannye, 800 + timeRnd);
+                setTimeout(dannye,timeRnd);
               }
             }
           }
@@ -1095,7 +1080,7 @@ function injected_main(){
           setTimeout(() => {
             provPL = true;
             provEnki(provPL);
-          }, 200);
+          }, over_time);
         };
         let urovIsk = "";
         if (main.getElementById("iskin_level")) {
@@ -1122,20 +1107,20 @@ function injected_main(){
         switch (urovIsk) {
           case "7":
             if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(3)").click();
-            setTimeout(provPlags, 1500 + timeRnd);
+            setTimeout(provPlags,timeRnd);
             break;
           case "8":
             if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(4)").click();
-            setTimeout(provPlags, 1500 + timeRnd);
+            setTimeout(provPlags,timeRnd);
             break;
           case "9":
             if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(5)").click();
-            setTimeout(provPlags, 1500 + timeRnd);
+            setTimeout(provPlags,timeRnd);
             break;
           default:
             setTimeout(() => {
               provEnki(true);
-            }, 2000 + timeRnd);
+            },timeRnd);
             break;
         }
       };
@@ -1164,7 +1149,7 @@ function injected_main(){
                    }
         },1000)} else {dannye()}
      }
-    setTimeout(kontZamena,4000)
+    setTimeout(kontZamena,3000+over_time)
 }
    // onclick="let kol=0;setInterval(()=>{if(100>kol){document.getElementById('but1').click(); kol++}else{clearInterval()}},1000)" сборки имплов или кристаллов в конверторе
 //&& iskDup[1]!==urovIs && iskDup[2]!==urovIs && iskDup[0]!==urovIs

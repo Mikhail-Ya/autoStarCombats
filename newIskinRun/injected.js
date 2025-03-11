@@ -123,25 +123,23 @@ function use_scroll(id) {
 }
 // "editor.unicodeHighlight.ambiguousCharacters": false 660 - 270 =  
 function injected_main(){
-    let abils50 = 115,
-    abils100 = 60,
-    abils200 = 40,
+    let abils50 = 0,
+    abils100 = 0,
+    abils200 = 0,
     gos = 0,
     euro = 0;
     const stavim = 0,// каким ставим
     nonAbils = true,// ждать пока энка восстановится
-    complect = true,
+    complect = false,
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 35;
-    const doptime = 200;
+    started = 22;
+    const doptime = 100;
     let main;
     const obnovScript = () => {
         main = document.getElementsByName('mainWindow')[0].contentDocument
         let scripts = main.getElementsByTagName('script').length    
-        // main.insertAdjacentHTML('beforebegin','работает')
-        // document.querySelector('div').insertAdjacentHTML('beforebegin','<p>privet</p>')
         if (scripts<10){
             var script = document.createElement("script");
             script.setAttribute("type", "text/javascript");
@@ -260,7 +258,7 @@ function injected_main(){
         }
     }
     let zapusc = setInterval(()=>{
-        var tekMin = new Date().getMinutes()
+        let tekMin = new Date().getMinutes()
          if(Number(tekMin)===started){
             clearInterval(zapusc)
             obnovScript()

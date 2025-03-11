@@ -466,18 +466,18 @@ function injected_main() {
   let dubleSector;
   let dubleSectorPoint = 0;
   // номер поискового 386
-  const poiskNom = 4; // номер поискового...
-  const kakProhod = 1; // 1 = прохождение, 0 = дроп...
-  const limitKont = 36; // сколько контенеров по квету до обмена
-  let kolKont = 0;
-  let trigger1 = 0;
-  let trigger1_2 = 0;
-  let trigger2 = 0;
-  let trigger3 = 0;
-  let trigger4 = 0;
-  let trigger5 = 0;
-  let triggerB = 0;
-  let trigger6 = 0;
+  const questNum = 1; // номер поискового...
+  const passing = true; // прохождение.
+  const limitOfCountainers = 39;
+  let kolKont = 0,
+   trigger1 = 0,
+   trigger1_2 = 0,
+   trigger2 = 0,
+   trigger3 = 0,
+   trigger4 = 0,
+   trigger5 = 0,
+   triggerB = 0,
+   trigger6 = 0;
   let hod = () => {
    clearTimeout();
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
@@ -488,7 +488,7 @@ function injected_main() {
     let pravo = mainOkno.getElementById("right");
     let levo = mainOkno.getElementById("left");
     let navigBtn = panelMenu.querySelector(".right img:last-of-type");
-    let timeRand = Math.floor(Math.random() * 500) + 800;
+    let timeRand = Math.floor(Math.random() * 800) + 1200;
     if (dubleSector !== sector) {
       dubleSector = sector;
       dubleSectorPoint = 0;
@@ -497,7 +497,7 @@ function injected_main() {
     }
 
     if (dubleSectorPoint < 3) {
-      if (poiskNom === 4) {
+      if (questNum === 4) {
         switch (sector) {
           case "1165E":
           case "3166E":
@@ -737,7 +737,7 @@ function injected_main() {
             setTimeout(obnovit, 4000);
             break;
         }
-      } else if (poiskNom === 3) {
+      } else if (questNum === 3) {
         switch (sector) {
           case "17050N":
           case "17051E":
@@ -1022,7 +1022,7 @@ function injected_main() {
             setTimeout(obnovit, 3500);
             break;
         }
-      } else if (poiskNom === 2) {
+      } else if (questNum === 2) {
         switch (sector) {
           case "1080E":
           case "2081W":
@@ -1214,7 +1214,7 @@ function injected_main() {
             setTimeout(obnovit, 4000);
             break;
         }
-      } else if (poiskNom === 1) {
+      } else if (questNum === 1) {
         switch (sector) {
           case "1051E":
           case "2051E":
@@ -1404,6 +1404,7 @@ function injected_main() {
               setTimeout(hod, 1000+timeRand);
               trigger4 = 0;
             }
+            break
           case "2072N":
             if (trigger5 === 0) {
               dalshe.click();
@@ -1414,6 +1415,7 @@ function injected_main() {
               setTimeout(hod, 1000+timeRand);
               trigger5 = 0;
             }
+            break
           default:
             dalshe.click();
             setTimeout(obnovit, 3500+timeRand);
@@ -1444,32 +1446,21 @@ function injected_main() {
     let chat_top_win =
       document.getElementsByName("chatmenuWindow")[0].contentDocument;
     let chatBtnday = chat_top_win.getElementById("tabNameChat");
-    let obnovRn = Math.floor(Math.random() * 500) + 1800;
+    let obnovRn = Math.floor(Math.random() * 500) + 1200;
     if (messageOkno && messageOkno.style.visibility === "visible") {
       let textInfoWin =
         mainOkno.getElementById("infoWindowMessage").textContent;
-      let viborkaTexta = "";
-
-      for (let t = 0; t < 2; t++) {
-        viborkaTexta = viborkaTexta + textInfoWin[t];
-      }
+      let viborkaTexta = textInfoWin?.split(' ', 1).join();
 
       switch (viborkaTexta) {
-        case "Бо":
+        case "Бой":
           panelMenu.querySelector(".right img:last-child").click();
           setTimeout(() => {
             chatBtnday.click();
           }, obnovRn);
           setTimeout(obnovit, obnovRn);
           break;
-        case "Вы":
-          panelMenu.querySelector(".right img:last-child").click();
-          setTimeout(() => {
-            chatBtnday.click();
-          }, obnovRn);
-          setTimeout(obnovit, obnovRn);
-          break;
-        case "Ож":
+        case "Ожидание":
           panelMenu.querySelector(".right img:last-child").click();
           setTimeout(boy, 1000+obnovRn);
           break;
@@ -1501,7 +1492,7 @@ function injected_main() {
       obnovit()
       return
     }
-    let scripts = mainOkno.getElementsByTagName("script").length;
+    // let scripts = mainOkno.getElementsByTagName("script").length;
 
     var script = document.createElement("script");
     script.setAttribute("type", "text/javascript");
@@ -1521,14 +1512,6 @@ function injected_main() {
         var kont = iskomoe[iskomoeKol - 1];
         var delBtn = kont.querySelector("tr:nth-child(2) td:nth-child(4) img");
       } else {
-        let chatOkno =
-          document.getElementsByName("chatWindow")[0].contentDocument;
-        let soobsheniya = chatOkno.getElementById("content_rus");
-        let data = " удалил контейнеры, было " + iskomoe.length;
-        var div = document.createElement("div");
-        div.setAttribute("class", "postmessage");
-        div.innerHTML = data;
-        soobsheniya.appendChild(div);
         kolKont = iskomoeKol;
         setTimeout(obnovit, 1000);
         navigBtn.click();
@@ -1543,8 +1526,8 @@ function injected_main() {
 
   let obnovit = () => {
         clearTimeout()
-    let timeRand = Math.floor(Math.random() * 500) + 1000;
-//     let dateInterval = setInterval(() => {
+    let timeRand = Math.floor(Math.random() * 500) + 1500;
+    //     let dateInterval = setInterval(() => {
       let mainOkno =
         document.getElementsByName("mainWindow")[0].contentDocument;
       let panelMenu =
@@ -1552,7 +1535,7 @@ function injected_main() {
 
       let navigBtn = panelMenu.querySelector(".right img:last-of-type");
       let sector = mainOkno.querySelector("#sector");
-      if (kolKont >= limitKont && sector !== null && kakProhod === 0) {
+      if (kolKont >= limitOfCountainers && sector !== null && !passing) {
         let trumeBtn = panelMenu.querySelector("#menu1 img:nth-child(8)");
         trumeBtn.click();
         setTimeout(obnovit,timeRand)
@@ -1673,10 +1656,10 @@ function injected_main() {
             kolKont++;
           }
           if (
-            kolKont >= limitKont &&
+            kolKont >= limitOfCountainers &&
             oblomok.src ===
               "http://img.starcombats.com/map/obj/chelnok_01.gif" &&
-            kakProhod === 1
+            passing
           ) {
             ataka2(oblomok);
           } else {
