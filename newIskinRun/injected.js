@@ -183,8 +183,7 @@ function injected_main(){
                        }
                     if(complect&&!kitActive){
                         main.querySelector('#new_complects li:nth-child(1)').click();
-                        setTimeout(()=>{
-                            resolve(true)}, 1522 + doptime)
+                        setTimeout(()=>{ resolve(true) }, 1522 + doptime)
                     } else {
                         setTimeout(()=>{
                              main.getElementById('reload').click()
