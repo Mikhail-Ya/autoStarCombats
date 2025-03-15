@@ -447,7 +447,7 @@ function injected_main(){
             menu_win = document.getElementsByName('menuWindow')[0].contentDocument,
             down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument,
             mostik = down_bar.getElementById('bridge_btn');
-            mostik.click()
+            mostik.click();
         setTimeout(() => {
             let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
             let chatBtnday = chat_top_win.getElementById('tabNameChat')
