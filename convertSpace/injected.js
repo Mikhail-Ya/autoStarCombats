@@ -17,13 +17,13 @@ function injected_main(){
 		let znakDarkGet = elementsSbor[2];
 		let znakSvetGet = elementsSbor[3];
 		// ЗАПЧАСТИ СБОРОК
-		let melDet = Number(dropElements[7].textContent);
-		let znakDark = Number(dropElements[1].textContent);
-		let znakSvet = Number(dropElements[3].textContent);
-		let biocard = Number(dropElements[5].textContent);
-		let krupDet = Number(dropElements[9].textContent);
-		let oblomAstron = Number(dropElements[13].textContent);
-		let oblomok = Number(dropElements[15].textContent);
+		const melDet = Number(dropElements[7].textContent),
+		 znakDark = Number(dropElements[1].textContent),
+		 znakSvet = Number(dropElements[3].textContent),
+		 biocard = Number(dropElements[5].textContent),
+		 krupDet = Number(dropElements[9].textContent),
+		 oblomAstron = Number(dropElements[13].textContent),
+		 oblomok = Number(dropElements[15].textContent);
 
 		if (oknoOtscheta.style.visibility === 'visible') {
 			let timeSborki = oknoOtscheta.querySelector('#infoWindowMessage');

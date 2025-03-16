@@ -402,13 +402,13 @@ function show_info(self)
 function injected_main(){
     let hil5000 = 0,
      hil3000 = 0,
-     shansInd = 0,
+     shansInd = 6,
      dubleSector='',
      propusk = 0,
      krugi = 7,
      triggerB = 0,
      energyHub = 0,
-     firstTurn = true,
+     firstTurn = false,
      secondTurn = true,
      dubleTime = 24;
     const funShans =()=>{
@@ -443,13 +443,13 @@ function injected_main(){
     }
 
     const hilka =()=> {
-        const main_win = document.getElementsByName('mainWindow')[0].contentDocument,
-            menu_win = document.getElementsByName('menuWindow')[0].contentDocument,
+        const menu_win = document.getElementsByName('menuWindow')[0].contentDocument,
             down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument,
             mostik = down_bar.getElementById('bridge_btn');
             mostik.click();
         setTimeout(() => {
-            let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
+            let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument,
+            main_win = document.getElementsByName('mainWindow')[0].contentDocument;
             let chatBtnday = chat_top_win.getElementById('tabNameChat')
             let indHpDiv2 = menu_win.getElementById('hptext').textContent.split('/').map(Number).reduce((a,b)=>a/b)*100;
             if ( 30 >= indHpDiv2) {
@@ -461,7 +461,7 @@ function injected_main(){
                     ability = 'img2'
                     hil3000++
                 }
-                if(ability != ''){
+                if(ability !== ''){
                 let chansClick = main_win.getElementById(ability)
                 chansClick.click()
                     setTimeout(() => {
@@ -472,14 +472,12 @@ function injected_main(){
                         }
                     }, 2000)
                     setTimeout(() => {
-                        
                          menu_win.querySelector('.right img:last-child').click()
-                         setTimeout(obrabotka,1000)
-                        
+                         setTimeout(obrabotka,5000)
                     }, 2000)
                 } else {
                     setTimeout(()=>{
-                        setTimeout(obrabotka,1000)
+                        setTimeout(obrabotka,5000)
                         menu_win.querySelector('.right img:last-child').click()
                     },66000)
                 }
@@ -490,7 +488,6 @@ function injected_main(){
             }
         }, 10000)
     }
-
     const boy=()=>{
                 triggerB=0
                 const mainOkno = document.getElementsByName('mainWindow')[0].contentDocument,
@@ -546,7 +543,7 @@ function injected_main(){
                 }
             } else if (activPer&&activPer.style.display==='block') {
                         let hpDiv = panelMenu.getElementById('hptext').textContent.split('/').map(Number).reduce((a,b)=>a/b)*100;
-                        // mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+                        const mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                         let naborHilok = mainOkno.querySelectorAll('#imps tr:nth-child(2) img');
                         let hilkaBoy;
                         for (let i = naborHilok.length - 1; i >= 0; i--) {
@@ -558,14 +555,14 @@ function injected_main(){
                         if (hpDiv<=60&&hilkaBoy){
                             hilkaBoy.click()
                             setTimeout(()=>{
-                                mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+                                // let mainOk = document.getElementsByName('mainWindow')[0].contentDocument;
                                 let ispol = mainOkno.getElementById('f_but')
                                 ispol.click()
                             },1000)
                         } else if(hpDiv<=60&&!hilkaBoy){
                             vBoyHilk.click()
                             setTimeout(()=>{
-                                mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+                                const mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                                 let ispol = mainOkno.getElementById('f_but')
                                 ispol.click()
                             },1000)
@@ -576,8 +573,6 @@ function injected_main(){
                 } else { 
                     setTimeout(()=>{
                         const perezagruz = mainOkno.querySelector('#ability3 a');
-                        //  mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-                        //  activPer = mainOkno.getElementById('reboot');
                         if (perezagruz && activPer?.style?.display !== 'block') {
                             perezagruz.click()
                         }
@@ -608,7 +603,7 @@ function injected_main(){
                     krugi++
                 } else if (dubleSector!==idSector.textContent) {
                     propusk=0;
-                };
+                }
                 let obnovRnd = Math.floor(Math.random()*800)+1800;
                 if (propusk <= 2){
                     
@@ -724,16 +719,12 @@ function injected_main(){
                                 setTimeout(dvijenie,obnovRnd)
                                 break
                             case '9453W':   
-                                if(energyHub <= 5){ vLevo.click() } 
+                                if(energyHub <= 10){ vLevo.click() } 
                                 else {
                                     dalshe.click()
                                     energyHub = 0;
                                 }
                                 setTimeout(dvijenie,1000+obnovRnd)
-                                break
-                            case '5460S':
-                                (energyHub <= 5)? dalshe.click() : razvorot.click();
-                                setTimeout(obrabotka,3000+obnovRnd) 
                                 break
                             default :
                                 dalshe.click()
@@ -795,7 +786,7 @@ function injected_main(){
                             if(triggerB===0){
                                 main_win.getElementById('item1').click()
                                 triggerB=1
-                            };
+                            }
                             navigBtn.click()
                             setTimeout(boy,2000)
                         },1000)
