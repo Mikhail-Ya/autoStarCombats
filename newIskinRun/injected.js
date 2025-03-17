@@ -54,7 +54,6 @@ function use_complect() {
     req.send({ix: Math.random()});
 }
 
-
 function use_ability(position, data) {
     if (true) {
         if (abils[position]) {
@@ -124,24 +123,23 @@ function use_scroll(id) {
 }
 // "editor.unicodeHighlight.ambiguousCharacters": false 660 - 270 =  
 function injected_main(){
-    let abils50 = 80,
-    abils100 = 50,
-    abils200 = 60,
+    let abils50 = 0,
+    abils100 = 0,
+    abils200 = 0,
     gos = 0,
-    euro = 0,
-    stavim = 0,// каким ставим
+    euro = 0;
+    const stavim = 0,// каким ставим
     nonAbils = true,// ждать пока энка восстановится
     complect = false,
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 12,
-    main;
+    started = 22;
+    const doptime = 100;
+    let main;
     const obnovScript = () => {
         main = document.getElementsByName('mainWindow')[0].contentDocument
         let scripts = main.getElementsByTagName('script').length    
-        // main.insertAdjacentHTML('beforebegin','работает')
-        // document.querySelector('div').insertAdjacentHTML('beforebegin','<p>privet</p>')
         if (scripts<10){
             var script = document.createElement("script");
             script.setAttribute("type", "text/javascript");
@@ -150,7 +148,7 @@ function injected_main(){
         }
         setTimeout(()=>{
             resetMain()
-        },2500)
+        },2500+doptime)
     }
 
     const iskEnerg = () => {
@@ -161,7 +159,7 @@ function injected_main(){
                 main = document.getElementsByName('mainWindow')[0].contentDocument;
                 let enkaIsk = Number(main.getElementById('Venergy').getAttribute('width'))
                 if(enkaIsk > 200){ resolve(true) } else { resolve(false) }
-            },1220)})
+            },1220 + doptime)})
     }
     
     const iskRun =()=>{
@@ -185,14 +183,13 @@ function injected_main(){
                        }
                     if(complect&&!kitActive){
                         main.querySelector('#new_complects li:nth-child(1)').click();
-                        setTimeout(()=>{
-                            resolve(true)}, 1322)
+                        setTimeout(()=>{ resolve(true) }, 1522 + doptime)
                     } else {
                         setTimeout(()=>{
                              main.getElementById('reload').click()
                              main = document.getElementsByName('mainWindow')[0].contentDocument
                             resolve(true)
-                        },1245)
+                        },1245 + doptime)
                     }
                 } else {
                     resolve(false)
@@ -224,9 +221,9 @@ function injected_main(){
                         euro--
                     } else if(nonAbils){
                     }
-                       setTimeout(resolve,500)
+                       setTimeout(resolve,500 + doptime)
                     
-            },1654)
+            },1654 + doptime)
         })
     }
 
@@ -260,10 +257,10 @@ function injected_main(){
         }
     }
     let zapusc = setInterval(()=>{
-        var tekMin = new Date().getMinutes()
+        let tekMin = new Date().getMinutes()
          if(Number(tekMin)===started){
             clearInterval(zapusc)
             obnovScript()
             }
-     },2000)
+     },2000 + doptime)
 }

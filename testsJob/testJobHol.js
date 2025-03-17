@@ -1,15 +1,26 @@
 // расчет максимального минимально возможных ваиантов шага при двух подходах
 function maxlimit(leng) {
-    let result = leng, check = 0;
-    
-    for (let index = 0; index < leng; index++) {
-        let sum = leng/index+index
-        if(sum < result){
-            result = sum;
-            check = index
+    let result = leng, step = 0, count = 0;
+    function recur(last){
+        if(last > 2 ){
+            let num = last/2
+            count++
+            recur(num)
+        } else {
+            return count+last
         }
     }
-    return (result + '  ' + check)
+    for (let index = 1; index < leng; index++) {
+        let lastSection = leng%index;
+        recur(lastSection)
+        let sum = Math.floor(leng/index)+index+count;
+        if(sum < result){
+            result = sum;
+            step = index;
+        }
+        count = 0
+    }
+    return (result+'   '+step);
 }
 
 // склонение слова "компьютер", в зависимости от количества
@@ -28,10 +39,15 @@ function declensWord(num){
 function multiTable(num) {
     let table = '';
     for (let i = 0; i <= num; i++) {
-        let str = ''+i;
-        for (let j = 0; j <= num; j++) {
+        let str ='';
+        if (i <= 9) {
+            str+=' ' + i;
+        } else { str += i }
+        for (let j = 1; j <= num; j++) {
             let result = i * j || j;
             if(result < 10){ str += ' ' }
+            if(result < 100 && num > 9) { str += ' '}
+            if(result < 1000 && num > 31){ str += ' '}
             str += ' ' + result;
         }
         table += str + '\n'

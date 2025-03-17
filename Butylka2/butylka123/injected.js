@@ -400,23 +400,22 @@ function show_info(self)
 
 
 function injected_main(){
-    let hil5000 = 10;
-    let hil3000 = 0;
-    let shansInd = 0;
-    let dubleSector='';
-    let propusk = 0;
-    let krugi = 7;
-    let kolBoy = 0;
-    let trigger1=0;
-    let triggerB=0;
-    let perUzel = 0;
-    let vtoroyUzel = 0;
-    let dubleTime = 24;
-    let funShans =()=>{
+    let hil5000 = 0,
+     hil3000 = 0,
+     shansInd = 6,
+     dubleSector='',
+     propusk = 0,
+     krugi = 6,
+     triggerB = 0,
+     energyHub = 0,
+     firstTurn = false,
+     secondTurn = true,
+     dubleTime = 24;
+    const funShans =()=>{
         let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
             let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
             let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
-        if (9 >= shansInd) {
+        if (12 >= shansInd) {
             let mostik = down_bar.getElementById('bridge_btn')
             mostik.click()
             setTimeout(() => {
@@ -443,19 +442,18 @@ function injected_main(){
         } 
     }
 
-    let hilka =()=> {
-        let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-            let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
-            let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
-        let mostik = down_bar.getElementById('bridge_btn')
-        mostik.click()
+    const hilka =()=> {
+        const menu_win = document.getElementsByName('menuWindow')[0].contentDocument,
+            down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument,
+            mostik = down_bar.getElementById('bridge_btn');
+            mostik.click();
         setTimeout(() => {
-            let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
+            let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument,
+            main_win = document.getElementsByName('mainWindow')[0].contentDocument;
             let chatBtnday = chat_top_win.getElementById('tabNameChat')
             let indHpDiv2 = menu_win.getElementById('hptext').textContent.split('/').map(Number).reduce((a,b)=>a/b)*100;
             if ( 30 >= indHpDiv2) {
-                 main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-                var ability = ""
+                let ability = ""
                 if (19 >= hil5000) {
                     ability = 'img3'
                     hil5000++
@@ -463,8 +461,8 @@ function injected_main(){
                     ability = 'img2'
                     hil3000++
                 }
-                if(ability != ''){
-                var chansClick = main_win.getElementById(ability)
+                if(ability !== ''){
+                let chansClick = main_win.getElementById(ability)
                 chansClick.click()
                     setTimeout(() => {
                     let useChans = main_win.querySelector('#info_div_content a:first-of-type')
@@ -474,18 +472,15 @@ function injected_main(){
                         }
                     }, 2000)
                     setTimeout(() => {
-                        
                          menu_win.querySelector('.right img:last-child').click()
-                         setTimeout(obrabotka,1000)
-                        
+                         setTimeout(obrabotka,5000)
                     }, 2000)
                 } else {
                     setTimeout(()=>{
-                        setTimeout(obrabotka,1000)
+                        setTimeout(obrabotka,5000)
                         menu_win.querySelector('.right img:last-child').click()
                     },66000)
                 }
-                console.log('time')
             } else {
                 console.log('time out hilth')
                 setTimeout(obrabotka,4000)
@@ -493,24 +488,24 @@ function injected_main(){
             }
         }, 10000)
     }
-
-    let boy=()=>{
+    const boy=()=>{
                 triggerB=0
-                let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-                let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
-                                let scripts = mainOkno.getElementsByTagName('script').length
-                                 if (scripts<8){
-                                 var script = document.createElement("script");
-                                 script.setAttribute("type", "text/javascript");
-                                 script.innerHTML = use_thing + '; ' + use_scroll + '; ' + use_ability + ';';
-                                 mainOkno.getElementsByTagName('head')[0].appendChild(script);}
-                let vipset = mainOkno.getElementById('radar');
-                let vBoyHilk = mainOkno.getElementById('computer');
-                let activPer = mainOkno.getElementById('reboot');
-                let messageOkno = mainOkno.getElementById('infoWindow');
-                let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
-                let chatBtnday = chat_top_win.getElementById('tabNameChat')
-                let obnovRn = Math.floor(Math.random()*2000)+2000;
+                const mainOkno = document.getElementsByName('mainWindow')[0].contentDocument,
+                 panelMenu = document.getElementsByName('menuWindow')[0].contentDocument,
+                 vipset = mainOkno.getElementById('radar'),
+                 vBoyHilk = mainOkno.getElementById('computer'),
+                 activPer = mainOkno.getElementById('reboot'),
+                 messageOkno = mainOkno.getElementById('infoWindow'),
+                 chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument,
+                 chatBtnday = chat_top_win.getElementById('tabNameChat'),
+                 obnovRn = Math.floor(Math.random()*1500)+1500,
+                 scripts = mainOkno.getElementsByTagName('script').length
+                        if (scripts<8){
+                            let script = document.createElement("script");
+                                script.setAttribute("type", "text/javascript");
+                                script.innerHTML = use_thing + '; ' + use_scroll + '; ' + use_ability + ';';
+                                mainOkno.getElementsByTagName('head')[0].appendChild(script);
+                        }
             if(!mainOkno.getElementById('achange')){
                 // panelMenu.querySelector('.right img:last-child').click()
                 setTimeout(obrabotka,1000+obnovRn)
@@ -518,36 +513,27 @@ function injected_main(){
             }
             if(messageOkno&&messageOkno.style.visibility === "visible"){
                 let textInfoWin = mainOkno.getElementById('infoWindowMessage').textContent
-                let viborkaTexta = ""
-
-                for (let t=0;t<2;t++){
-                    viborkaTexta = viborkaTexta + textInfoWin[t]
-                }
+                let viborkaTexta = textInfoWin?.split(' ', 1).join();
                 
                 switch (viborkaTexta) {
-                    case "Бо":
+                    case "Бой":
                         panelMenu.querySelector('.right img:last-child').click()
                         setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                        setTimeout(obrabotka,1000+obnovRn)
+                        setTimeout(obrabotka,300+obnovRn)
                         break
                     case "Вы":
                         panelMenu.querySelector('.right img:last-child').click()
                         setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                        setTimeout(obrabotka,1000+obnovRn)
+                        setTimeout(obrabotka,300+obnovRn)
                         break
-                    case "Ис":
-                        let autoboy = mainOkno.querySelector('#new_centerBlock_footer tr:nth-child(2) td:nth-child(2) img')
+                    case "Использование":
+                        const autoboy = mainOkno.querySelector('#new_centerBlock_footer tr:nth-child(2) td:nth-child(2) img')
                         autoboy.click()
                         setTimeout(boy,obnovRn)
                         break
-                    case "Ож":
+                    case "Ожидание":
                         panelMenu.querySelector('.right img:last-child').click()
-                        setTimeout(boy,1000+obnovRn)
-                        break
-                    case "Пе":
-                        mainOkno.querySelector('.infobtn').click()
-                        panelMenu.querySelector('.right img:last-child').click()
-                        setTimeout(obrabotka,1000+obnovRn)
+                        setTimeout(boy,obnovRn)
                         break
                     default:
                         panelMenu.querySelector('.right img:last-child').click()
@@ -557,26 +543,26 @@ function injected_main(){
                 }
             } else if (activPer&&activPer.style.display==='block') {
                         let hpDiv = panelMenu.getElementById('hptext').textContent.split('/').map(Number).reduce((a,b)=>a/b)*100;
-                        mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+                        const mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                         let naborHilok = mainOkno.querySelectorAll('#imps tr:nth-child(2) img');
                         let hilkaBoy;
-                        for (var i = naborHilok.length - 1; i >= 0; i--) {
+                        for (let i = naborHilok.length - 1; i >= 0; i--) {
                             if(naborHilok[i].src==='http://img.starcombats.com/scrolls/p_automech_inf.gif'){
                                 hilkaBoy=naborHilok[i]
-                            }
-                            
+                                break
+                            } 
                         }
                         if (hpDiv<=60&&hilkaBoy){
                             hilkaBoy.click()
                             setTimeout(()=>{
-                                mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+                                // let mainOk = document.getElementsByName('mainWindow')[0].contentDocument;
                                 let ispol = mainOkno.getElementById('f_but')
                                 ispol.click()
                             },1000)
                         } else if(hpDiv<=60&&!hilkaBoy){
                             vBoyHilk.click()
                             setTimeout(()=>{
-                                mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+                                const mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
                                 let ispol = mainOkno.getElementById('f_but')
                                 ispol.click()
                             },1000)
@@ -586,39 +572,39 @@ function injected_main(){
                         setTimeout(boy,obnovRn)
                 } else { 
                     setTimeout(()=>{
-                         let perezagruz = mainOkno.querySelector('#ability3 a');
-                         mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-                         activPer = mainOkno.getElementById('reboot');
-                        if (perezagruz&& activPer && activPer.style.display!=='block') {
+                        const perezagruz = mainOkno.querySelector('#ability3 a');
+                        if (perezagruz && activPer?.style?.display !== 'block') {
                             perezagruz.click()
                         }
                         setTimeout(()=>{
                             if(messageOkno.style.visibility!=="visible"){
-                                mainOkno.querySelector('#new_centerBlock_footer img:first-child').click()}
+                                mainOkno.querySelector('#new_centerBlock_footer img:first-child').click()
+                            }
+                            boy()
                         },500)
-                        boy()
                     },obnovRn)
                 }
         }
     const dvijenie =()=>{
-                let main_win = document.getElementsByName('mainWindow')[0].contentDocument
-                menu_win = document.getElementsByName('menuWindow')[0].contentDocument
-                down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument
-                idSector = main_win.getElementById("sector")
-                dalshe = main_win.getElementById('fwd')
-                vLevo = main_win.getElementById('left')
-                vPravo = main_win.getElementById('right')
-                razvorot = main_win.getElementById('back')
-                vremyaChasy = Number(new Date().getHours());
+                const main_win = document.getElementsByName('mainWindow')[0].contentDocument,
+                    menu_win = document.getElementsByName('menuWindow')[0].contentDocument,
+                    idSector = main_win.getElementById("sector"),
+                    dalshe = main_win.getElementById('fwd'),
+                    vLevo = main_win.getElementById('left'),
+                    vPravo = main_win.getElementById('right'),
+                    razvorot = main_win.getElementById('back'),
+                    vremyaChasy = Number(new Date().getHours());
                 if (!idSector){
                     obrabotka() 
                     return} 
                 if(dubleSector === idSector.innerText){
                     propusk++
-                } else if(dubleSector === '2450S'){ krugi++} else if (dubleSector!==idSector.textContent) {
-                        propusk=0;
-                };
-                let obnovRnd = Math.floor(Math.random()*2000)+1500;
+                } else if(dubleSector === '2450S'){ 
+                    krugi++
+                } else if (dubleSector!==idSector.textContent) {
+                    propusk=0;
+                }
+                let obnovRnd = Math.floor(Math.random()*800)+1800;
                 if (propusk <= 2){
                     
                     dubleSector = idSector.innerText
@@ -672,7 +658,7 @@ function injected_main(){
                             case '6453E':
                             case '5453N':
                             case '9454N':
-                            case '9453W':
+                            case '9452S':
                             case '3454E':
                             case '2454N':
                             case '2451W':
@@ -705,35 +691,40 @@ function injected_main(){
                             case '5459S':
                             case '6459E':
                             case '9459S':
+                            case '9453E':
+                            case '9452W':
                                 vPravo.click()
                                 setTimeout(dvijenie,obnovRnd)
                                 break
                             case '9457W' :
-                                if (0 === perUzel){
-                                    vLevo.click()
-                                    perUzel++
-                                }else{
-                                    vPravo.click()
-                                    perUzel--
-                                }
+                                (firstTurn)? vLevo.click() : vPravo.click();
+                                firstTurn = !firstTurn
                                 setTimeout(dvijenie,obnovRnd)
                                 break
-                            
                             case '5451W':
-                                if(0 === vtoroyUzel){
+                                if(secondTurn){
                                     vPravo.click()
-                                    vtoroyUzel++
+                                    energyHub++
                                 }else{
-                                    dalshe.click()
-                                    vtoroyUzel--
-                                    if(vtoroyUzel<0){vtoroyUzel=0}}
-                                    setTimeout(dvijenie,3000+obnovRnd)
+                                    dalshe.click() 
+                                }
+                                secondTurn = !secondTurn
+                                setTimeout(dvijenie,3000+obnovRnd)
                                 break
                             case '7454S':
                             case '6456E':
-                            case '5460S':
+                            case '7452N':
+                            case '8460S':
                                 razvorot.click()
                                 setTimeout(dvijenie,obnovRnd)
+                                break
+                            case '9453W':   
+                                if(energyHub <= 10){ vLevo.click() } 
+                                else {
+                                    dalshe.click()
+                                    energyHub = 0;
+                                }
+                                setTimeout(dvijenie,1000+obnovRnd)
                                 break
                             default :
                                 dalshe.click()
@@ -755,20 +746,22 @@ function injected_main(){
                 
         }
     function obrabotka (){
-           let vremyaMin = Number(new Date().getMinutes())
-           let vremyaChas = Number(new Date().getHours())
-           if( 22 === vremyaChas && 0 === vremyaMin){
-               hil5000 = 0;
-               hil3000 = 0;
-           } else if (8 === vremyaChas && 0 === vremyaMin){
-            shansInd = 0}
-            let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-            let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
-            let idSector = main_win.getElementById("sector")
-            let hpDiv = menu_win.getElementById('hptext').textContent.split('/').map(Number).reduce((a,b)=>a/b)*100
+            let vremyaMin = Number(new Date().getMinutes()),
+            vremyaChas = Number(new Date().getHours());
+            if( 6 === vremyaChas && 0 === vremyaMin ){
+                hil5000 = 0;
+                hil3000 = 0;
+            } else if (16 === vremyaChas && 0 === vremyaMin){
+                shansInd = 0
+            }
+            const main_win = document.getElementsByName('mainWindow')[0].contentDocument,
+                menu_win = document.getElementsByName('menuWindow')[0].contentDocument,
+                idSector = main_win?.getElementById("sector"),
+                navigBtn = menu_win.querySelector('.right img:last-of-type'),
+                hpDiv = menu_win.getElementById('hptext').textContent.split('/').map(Number).reduce((a,b)=>a/b)*100;
            
-            if (null != idSector) {
-                let obekty = [main_win.getElementById('obj_left'),
+            if (null != idSector || idSector) {
+                const obekty = [main_win.getElementById('obj_left'),
                     main_win.getElementById('obj_front'),
                     main_win.getElementById('obj_right'),]
                 let astron;
@@ -781,28 +774,28 @@ function injected_main(){
                     }
                 }
                 
-                let proigral = main_win.getElementById('loser').src
-                if ('http://img.starcombats.com/map/loser1.gif' === proigral||'http://img.starcombats.com/map/loser2.gif' === proigral) {
+                const proigral = main_win.getElementById('loser').src
+                if ('http://img.starcombats.com/map/loser1.gif' === proigral
+                    ||'http://img.starcombats.com/map/loser2.gif' === proigral) {
                     funShans()
                 } else if (hpDiv < 30) {
                     hilka()
                 } else if (astron) {
                         astron.click()
                         setTimeout(() => {
-                            main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-                            if(triggerB===0){main_win.getElementById('item1').click();triggerB=1}
-                            let navigBtn = menu_win.querySelector('.right img:last-of-type')
-                            kolBoy++
+                            if(triggerB===0){
+                                main_win.getElementById('item1').click()
+                                triggerB=1
+                            }
                             navigBtn.click()
-                            setTimeout(boy,3000)
+                            setTimeout(boy,2000)
                         },1000)
-                        
                 } else {
                        setTimeout(dvijenie,1352)
                 }
                 
                 
-            } else if (!main_win){ let navigBtn = menu_win.querySelector('.right img:last-of-type')
+            } else if (!main_win){ 
                 navigBtn.click()
                 setTimeout(obrabotka,14000)
             } else if(main_win.getElementById('radar')) {
@@ -815,11 +808,10 @@ function injected_main(){
                                          script.innerHTML = use_thing + '; ' + use_scroll + '; ' + use_ability + ';';
                                         mainOkno.getElementsByTagName('head')[0].appendChild(script);}
                                 boy()
-            } else { let navigBtn = menu_win.querySelector('.right img:last-of-type')
-                                navigBtn.click()
-                                setTimeout(obrabotka,14000)
-                            }
-            
+            } else { 
+                navigBtn.click()
+                setTimeout(obrabotka,14000)
+            }
     }
 setTimeout(obrabotka,10000)
 }

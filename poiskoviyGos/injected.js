@@ -501,7 +501,7 @@ function injected_main() {
   let dubleSector;
   let dubleSectorPoint = 0;
   // номер поискового
-  const poiskNom = 2; // номер поискового...
+  const poiskNom = 1; // номер поискового...
   const kakProhod = 0; // 1 = прохождение, 0 = дроп...
   const limitKont = 5; // сколько контенеров по квету до обмена
   let kolKont = 0;
@@ -1325,10 +1325,10 @@ function injected_main() {
         use_thing + "; " + use_scroll + "; " + use_ability + ";";
       mainOkno.getElementsByTagName("head")[0].appendChild(script);
     }
-    let perezagruz = mainOkno.querySelector("#ability3 a");
-    let vipset = mainOkno.getElementById("radar");
+    // let perezagruz = mainOkno.querySelector("#ability3 a");
+    // let vipset = mainOkno.getElementById("radar");
     let activPer = mainOkno.getElementById("reboot");
-    let perezImg = mainOkno.getElementById("");
+    // let perezImg = mainOkno.getElementById("");
     let messageOkno = mainOkno.getElementById("infoWindow");
     let chat_top_win =
       document.getElementsByName("chatmenuWindow")[0].contentDocument;
@@ -1384,9 +1384,9 @@ function injected_main() {
       }
     } else if (
       activPer.style.display === "block" ||
-      mainOkno.querySelector(".name_out b").textContent ===
+      mainOkno?.querySelector(".name_out b")?.textContent ===
         "---Daktaklakpak---" ||
-      mainOkno.querySelector(".name_out b").textContent === "Охранный дрон"
+      mainOkno?.querySelector(".name_out b")?.textContent === "Охранный дрон"
     ) {
       let mainOkno =
         document.getElementsByName("mainWindow")[0].contentDocument;
@@ -1423,7 +1423,7 @@ function injected_main() {
     let iskomoeName = "Контейнер с запчастями";
     let obshee = mainOkno.querySelectorAll(".item");
 
-    let scripts = mainOkno.getElementsByTagName("script").length;
+    // let scripts = mainOkno.getElementsByTagName("script").length;
 
     var script = document.createElement("script");
     script.setAttribute("type", "text/javascript");
@@ -1533,36 +1533,6 @@ function injected_main() {
             }
           }
         }
-        /*   window.onload = function() {
-                
-                document.getElementById("ocr_url").value = ""; // Сбрасываем форму после перезагрузки
-                
-                var control = document.getElementById("ocr_url");
-                
-                control.addEventListener("change", function() {
-                
-                        var files = control.files;
-
-                        document.getElementById("ocr_button").addEventListener("click", function() {
-                                
-                                document.getElementById("ocr_result").innerHTML  = "Идет распознавание текста...";
-                                
-                                Tesseract.recognize(files[0].name).then(function(result) {
-                        
-                                        lang: "rus" // Язык текста
-                        
-                                }).then(function(result) {
-                                
-                                        document.getElementById("ocr_result").innerHTML  = result.text;
-                                
-                                });
-         
-                        });
- 
-                });
-                
-        };*/
-
         let ataka = (oblomok) => {
           oblomok.click();
           setTimeout(() => {

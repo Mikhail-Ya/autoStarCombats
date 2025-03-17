@@ -1,26 +1,23 @@
 
 
 function injected_main(){
-  let dubleSector;
-  let propusk;
-//   let trigger1=false; 
-//   let dubleVert=0;
-//   let dubleGorez=0;
-  let konecTime = 60;
+  let dubleSector, propusk;
+  const centGor = 52,
+        centVer = 5; 
+  const konecTime = 60;
         const deystvie =()=>{
-                let main_win = document.getElementsByName('mainWindow')[0].contentDocument,
+                const main_win = document.getElementsByName('mainWindow')[0].contentDocument,
                  idSector = main_win.getElementById("sector"),
                  polSec = idSector.textContent,
                  vLevo = main_win.getElementById('left'),
                  vPravo = main_win.getElementById('right'),
                  dalshe = main_win.getElementById('fwd'),
-                 razvorot = main_win.getElementById('back'),
-                 napravlenie = '',
+                 razvorot = main_win.getElementById('back');
+                let napravlenie = '',
                  gorizont='',
                  vertical='',
-                 nomerSektor = '',
-                 centGor = 56,
-                 centVer = 5;
+                 nomerSektor = '';
+                 
                 for (var i =0; i<= polSec.length - 1; i++) {
                       if (i===polSec.length-1) { 
                         napravlenie = polSec[i]
@@ -36,85 +33,36 @@ function injected_main(){
                 gorizont = Number(gorizont)
                 vertical = Number(vertical)
                
-                let imgObekt = [main_win.getElementById('img_left'),
+                const imgObekt = [main_win.getElementById('img_left'),
                         main_win.getElementById('img_right'),
                         main_win.getElementById('img_front')]
-                let pryamo = false,
-                    pravo = false,   
-                    levo = false;
-
-                switch(imgObekt[1].src){
-                case 'http://img.starcombats.com/map/cor/ost00.gif':
-                case 'http://img.starcombats.com/map/cor/ost00s.gif':
-                case 'http://img.starcombats.com/map/cor/ost01.gif':
-                case 'http://img.starcombats.com/map/cor/ost01s.gif':
-                case 'http://img.starcombats.com/map/cor/ost02.gif':
-                case 'http://img.starcombats.com/map/cor/ost02s.gif':
-                case 'http://img.starcombats.com/map/cor/ost03.gif':
-                case 'http://img.starcombats.com/map/cor/ost03s.gif':
-                        pravo=false
-                        break
-                default:
-                        pravo=true
-                        break
-                }
-                switch(imgObekt[0].src){
-                case 'http://img.starcombats.com/map/cor/ost00.gif':
-                case 'http://img.starcombats.com/map/cor/ost00s.gif':
-                case 'http://img.starcombats.com/map/cor/ost01.gif':
-                case 'http://img.starcombats.com/map/cor/ost01s.gif':
-                case 'http://img.starcombats.com/map/cor/ost02.gif':
-                case 'http://img.starcombats.com/map/cor/ost02s.gif':
-                case 'http://img.starcombats.com/map/cor/ost03.gif':
-                case 'http://img.starcombats.com/map/cor/ost03s.gif':
-                        levo=false
-                        break
-                default:
-                        levo=true
-                        break
-                }
-                switch(imgObekt[2].src){
-                case 'http://img.starcombats.com/map/cor/ost00.gif':
-                case 'http://img.starcombats.com/map/cor/ost00s.gif':
-                case 'http://img.starcombats.com/map/cor/ost01.gif':
-                case 'http://img.starcombats.com/map/cor/ost01s.gif':
-                case 'http://img.starcombats.com/map/cor/ost02.gif':
-                case 'http://img.starcombats.com/map/cor/ost02s.gif':
-                case 'http://img.starcombats.com/map/cor/ost03.gif':
-                case 'http://img.starcombats.com/map/cor/ost03s.gif':
-
-                        pryamo=false
-                        break
-                default:
-                        pryamo=true
-                        break
-                }
-
+                const array_blocked = [ 'http://img.starcombats.com/map/cor/ost00.gif',
+                                        'http://img.starcombats.com/map/cor/ost00s.gif',
+                                        'http://img.starcombats.com/map/cor/ost01.gif',
+                                        'http://img.starcombats.com/map/cor/ost01s.gif',
+                                        'http://img.starcombats.com/map/cor/ost02.gif',
+                                        'http://img.starcombats.com/map/cor/ost02s.gif',
+                                        'http://img.starcombats.com/map/cor/ost03.gif',
+                                        'http://img.starcombats.com/map/cor/ost03s.gif']
+                const pryamo = !array_blocked.includes(imgObekt[2].src),
+                    pravo = !array_blocked.includes(imgObekt[1].src),   
+                    levo = !array_blocked.includes(imgObekt[0].src);
                 
-                let oknoMes = document.getElementsByName('chatbarWindow')[0].contentDocument;
+                const message_window = document.getElementsByName('chatbarWindow')[0].contentDocument,
+                        otp = message_window.querySelector('.chatbtn'),
+                        messege = message_window.querySelector('#chatmessage');
 
-                let otp = oknoMes.querySelector('.chatbtn');
-                let messege = oknoMes.querySelector('#chatmessage');
-
-                let oblomki = [main_win.querySelector('#obj_left'),
-                                        main_win.querySelector('#obj_front'),
-                                        main_win.querySelector('#obj_right')]
-                                let oblomok;
-                                for (var i = 0; i < oblomki.length; i++) {
-                                        let imgObekt = oblomki[i].firstChild.src
-                                        var nonOblom = oblomki[i];
-                                        if (nonOblom.style.display==='block') {
-                                                if(imgObekt=== 'http://img.starcombats.com/map/obj/box08.gif'){
+                const oblomki = [main_win.querySelector('#obj_left'),
+                                main_win.querySelector('#obj_front'),
+                                main_win.querySelector('#obj_right')]
+                        oblomki.forEach(elem => {
+                                if (elem.style.display==='block') {
+                                        if(elem.firstChild.src === 'http://img.starcombats.com/map/obj/box08.gif'){
                                                 messege.value = idSector.textContent;
-                                                setTimeout(()=>{otp.click()},1000); 
-                                                }
-                                        }        
-                                }
-                for (var i = 0; i < imgObekt.length; i++) {
-                        var imgOb = imgObekt[i]
-                        
-                }
-                
+                                                setTimeout(()=>{otp.click()},5000); 
+                                        }
+                                }        
+                        })
                 if(gorizont===centGor&&vertical===centVer){
                         obrabotka()
                         return
@@ -131,6 +79,8 @@ function injected_main(){
                                         dalshe.click()
                                 } else if (gorizont>centGor&&levo) {
                                         vLevo.click()
+                                } else if (gorizont<centVer&&!pravo&&pryamo) {
+                                        dalshe.click()
                                 } else if (gorizont<centGor&&pravo) {
                                         vPravo.click()
                                 } else if(!levo&&!pravo){
@@ -157,6 +107,8 @@ function injected_main(){
                                         dalshe.click()
                                 } else if (gorizont<centGor&&levo) {
                                         vLevo.click()
+                                } else if (gorizont<centVer&&!pravo&&pryamo) {
+                                        dalshe.click()
                                 } else if (gorizont>centGor&&pravo) {
                                         vPravo.click()
                                 } else if(!levo&&!pravo){
@@ -185,40 +137,33 @@ function injected_main(){
                 obrabotka()
         }
         const obrabotka =()=>{
-        let interRnd = Math.floor(Math.random()*1000)+3800;
-            let obshiyCont = setInterval(()=>{
-           
-            let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-        //     let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
-        //     let down_bar = document.getElementsByName('chatbarWindow')[0].contentDocument;
-            let idSector = main_win.getElementById("sector");
-        //     let triggerTrume = main_win.getElementById("inventory_current");
-        //     let triggerMost = main_win.getElementById("mostik");
-            let time = Number(new Date().getMinutes());
+          const interRnd = Math.floor(Math.random()*1000)+3000,
+                obshiyCont = setInterval(()=>{
+                const main_win = document.getElementsByName('mainWindow')[0].contentDocument,
+                 idSector = main_win.getElementById("sector"),
+                 time = Number(new Date().getMinutes());
                 if(konecTime===time){
                         top.location.href="/exit.php?1"
                         return
                 }
-            if (null != idSector) {
-                
-                // let obnovRnd = Math.floor(Math.random()*1000)+1000;
-                if ( propusk <= 2){
+                if (null != idSector) {
+                        if ( propusk <= 2){
                         
-                    if (idSector.textContent===dubleSector) {
-                        propusk++
-                    }
-                    clearInterval(obshiyCont)
-                    deystvie()
+                        if (idSector.textContent===dubleSector) {
+                                propusk++
+                        }
+                        clearInterval(obshiyCont)
+                        deystvie()
+                        } else {
+                                let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
+                                panelMenu.querySelector('.right img:last-child').click()
+                                propusk=0;
+                        }
+                        dubleSector = idSector.textContent;
                 } else {
                         let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
-                panelMenu.querySelector('.right img:last-child').click()
-                        propusk=0;
+                        panelMenu.querySelector('.right img:last-child').click()
                 }
-                dubleSector = idSector.textContent;
-            } else {
-                let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
-                panelMenu.querySelector('.right img:last-child').click()
-            }
         },interRnd);
         }
 obrabotka()

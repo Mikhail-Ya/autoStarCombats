@@ -651,23 +651,25 @@ function reload()
 
 init();
 function injected_main(){
-    let ispolzAbil50 = 50;
-    let ispolzAbil100 = 220;
-    let ispolzAbil200 = 100;
-    let abilkaGos = 0;
-    let abilkaEkr = 1000;
-    let stoperInd = true;
-    let zapiska = {'5':0,'6':0,'7':0,'8':0,'9':0}//список забегов искинов по порядку
-	let povtorVrem = 24;
-    let povtorVrem1 = 24;
-    let last_minuty = 0;
-    let isklyuchit = [14,17,18];// искинов какого уровня не ищем
-    let iskDup = [9,7,8];// какие искины ставятся третьими
-    let limit = 23;
-    let iskinLimit = '13';
-    let ustanovitAnti = true;
+    let abi_50 = 54,
+     abi_100 = 9,
+     abi_200 = 0,
+     abilkaGos = 0,
+     abilkaEkr = 0,
+	 povtorVrem = 24,
+     povtorVrem1 = 24,
+     last_minuty = 0;
+    const stoperInd = true,
+     iskDup = [9,8],// какие жуки бегают
+     ustanovitAnti = false,
+     installation = 0, // каким ставяться в заявку
+     limit_abil_50 = 120,
+     limit_abil_100 = 60,
+     limit_abil_200 = 40,
+     with_plugins = false,
+     over_time = 1500;
 
-    let perezIskin = 5;
+    let perezIskin = 0;
 
     let boy=()=>{
 
@@ -875,7 +877,7 @@ function injected_main(){
                 let messageOkno = mainOkno.getElementById('infoWindow');
                 let chat_top_win = document.getElementsByName('chatmenuWindow')[0].contentDocument;
                 let chatBtnday = chat_top_win.getElementById('tabNameChat')
-                let obnovRn = Math.floor(Math.random()*500)+1000;
+                let obnovRn = Math.floor(Math.random()*500)+over_time;
                 if(messageOkno&&messageOkno.style.visibility === "visible"){
                     let textInfoWin = mainOkno.getElementById('infoWindowMessage').textContent
                     let viborkaTexta = ""
@@ -883,16 +885,6 @@ function injected_main(){
                         viborkaTexta = viborkaTexta + textInfoWin[t]
                     }
                     switch (viborkaTexta) {
-                        case "Бо":
-                            panelMenu.querySelector('.right img:last-child').click()
-                            setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                            setTimeout(dannye,obnovRn)
-                            break
-                        case "Вы":
-                            panelMenu.querySelector('.right img:last-child').click()
-                            setTimeout(()=>{chatBtnday.click()}, obnovRn)
-                            setTimeout(dannye,obnovRn)
-                            break
                         case "Ис":
                             let autoboy = mainOkno.querySelector('#new_centerBlock_footer tr:nth-child(2) td:nth-child(2) img')
                             autoboy.click()
@@ -932,7 +924,6 @@ function injected_main(){
                 }
         }
     let useAnti=()=>{
-        console.log('anti')
         let mainOk = document.getElementsByName('mainWindow')[0].contentDocument;
         mainOk.getElementById('img15').click()
         setTimeout(()=>{
@@ -947,258 +938,192 @@ function injected_main(){
     }
     let dannye=()=>{
         let vremya = Number(new Date().getHours())
-        let minuty = Number(new Date().getMinutes())
-        
-        
-	if (povtorVrem !== vremya){
-		if (25 === vremya){
-         	   ispolzAbil100 = 0;
-      		  }
-                if (7 === vremya){
-                    ispolzAbil50 = 0;
-                    }
-                    if (10 === vremya){
-                        ispolzAbil200 = 0;
-                        }
-		let chatOkno = document.getElementsByName('chatWindow')[0].contentDocument
-                           let soobsheniya = chatOkno.getElementById('content_rus')
-                           let data = ' '+ vremya +' часов, забеги по искинам: '+zapiska[5]+' - '+zapiska[6]+' - '+zapiska[7]+' - '+zapiska[8]+' - '+zapiska[9];
-                          
-                          var div = document.createElement("div");
-                            div.setAttribute("class", "postmessage");
-                            div.innerHTML = data;
-                            soobsheniya.appendChild(div)
-		povtorVrem = vremya;
-
+        let minuty = Number(new Date().getMinutes()) 
+	    if (povtorVrem !== vremya){
+		    if (25 === vremya){
+                ispolzAbil100 = 0;
+          	}
+            if (7 === vremya){
+                ispolzAbil50 = 0;
+            }
+            if (10 === vremya){
+                ispolzAbil200 = 0;
+            }   
+		    povtorVrem = vremya;
 	    }
+
         if (povtorVrem1 !== vremya&&last_minuty < minuty&&ustanovitAnti) {
-            
-         let mainOk = document.getElementsByName('mainWindow')[0].contentDocument;
             top.mainWindow.location.replace('/bridge.php');
-            
             povtorVrem1 = vremya;
         }
         
-        let timeRnd = Math.floor(Math.random()*1000)+1500
+        let timeRnd = Math.floor(Math.random()*1000)+over_time+2000
         let obnovDate = setInterval(()=>{
-            
-        let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-        if (mainOkno.getElementById('reload')){mainOkno.getElementById('reload').click()
-           perezIskin = 5;
-           mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-            let urovIs = Number(mainOkno.getElementById('iskin_level').textContent)
-        let kol = Number(mainOkno.getElementById('total_req').textContent)
-            let podatKnop = mainOkno.getElementById('start_but')
-            let podatString = podatKnop.textContent
-            if('Подать заявку'!==podatString&&1===kol||'Подать заявку'!==podatString&&2===kol){
-                podatKnop.click()
-                clearInterval(obnovDate)
-                kontZamena()
-                return;
-            }
-            if (3===kol&&iskDup[1]===urovIs||3===kol&&iskDup[0]===urovIs||3===kol&&iskDup[2]===urovIs){
-
-            }
-            
-        if (3===kol&&'Подать заявку'===podatString||iskDup[0]===urovIs&&2<=kol&&'Подать заявку'===podatString||iskDup[1]===urovIs&&2<=kol&&'Подать заявку'===podatString||iskDup[2]===urovIs&&2<=kol&&'Подать заявку'===podatString){
-            mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-            let scripts = mainOkno.getElementsByTagName('script').length
-            if (scripts>9){
-                clearInterval(obnovDate)
-                proverka()
-            }else{
-                clearInterval(obnovDate)
-                kontZamena()}
-        } else if('Отозвать заявку'===podatString){
-
-        } else{
-            let iskinUrovList = mainOkno.querySelectorAll('.iskin__lvls-item-lvl')
-            let kolZayavka = mainOkno.querySelectorAll('.iskin__lvls-item-count')
-            let iscinPerekl = mainOkno.querySelectorAll('.iskin__tpl')
-            let posled;
-            iskiny:for (var i = 0; i < iskinUrovList.length; i++) {
-                var urovIsk = Number(iskinUrovList[i].textContent)
-                var kolZa = Number(kolZayavka[i].textContent)
-                for (var j = 0; j < iscinPerekl.length; j++) {
-                    var juk = Number(iscinPerekl[j].textContent)
-                    if (kolZa === 3 && juk === urovIsk && urovIsk !== isklyuchit[0]&& urovIsk !== isklyuchit[1]&& urovIsk !== isklyuchit[2]||iskDup[0]===urovIsk&&2<=kolZa&& juk === urovIsk||iskDup[1]===urovIsk&&2<=kolZa&& juk === urovIsk||iskDup[2]===urovIsk&&2<=kolZa&& juk === urovIsk) {
-                       posled = iscinPerekl[j]
-                       break iskiny;
+            let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+        
+            if (mainOkno.getElementById('reload')){mainOkno.getElementById('reload').click()
+                mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
+                let urovIs = Number(mainOkno.getElementById('iskin_level').textContent)
+                let kol = Number(mainOkno.getElementById('total_req').textContent)
+                let podatKnop = mainOkno.getElementById('start_but')
+                let podatString = podatKnop.textContent
+        
+                if (iskDup.includes(urovIs)&&installation <= kol && 'Подать заявку'===podatString){ 
+                    mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;        
+                    let scripts = mainOkno.getElementsByTagName('script').length        
+                        if (scripts>9){       
+                            clearInterval(obnovDate)   
+                            proverka()      
+                        }else{      
+                            clearInterval(obnovDate)      
+                            kontZamena()
+                        }       
+                } else if('Отозвать заявку'===podatString){
+       
+                } else {
+                        let iskinUrovList = mainOkno.querySelectorAll('.iskin__lvls-item-lvl')
+                        let kolZayavka = mainOkno.querySelectorAll('.iskin__lvls-item-count')
+                        let iscinPerekl = mainOkno.querySelectorAll('.iskin__tpl')
+                        let posled;
+                        iskiny:for (let i = 0; i < iskinUrovList.length; i++) {
+                        let urovIsk = Number(iskinUrovList[i].textContent)
+                        let kolZa = Number(kolZayavka[i].textContent)
+                        for (let j = 0; j < iscinPerekl.length; j++) {
+                            let juk = Number(iscinPerekl[j].textContent)
+                            if (iskDup.includes(urovIsk)&&installation<=kolZa&& juk === urovIsk) {
+                               posled = iscinPerekl[j]
+                               break iskiny;
+                            }
+                            }
+                        }
+                    if (posled){
+                        posled.click()
+                        clearInterval(obnovDate)
+                        kontZamena()
                     }
                 }
-            }
-            if (posled){
-                posled.click()
-                    clearInterval(obnovDate)
-                    kontZamena()
-            }
-        }
-        }else if(mainOkno.getElementById('achange')) {    
-                                clearInterval(obnovDate)
-                                boy() 
+            } else if (mainOkno.getElementById('achange')) {    
+                clearInterval(obnovDate)
+                boy() 
             } else if (mainOkno.getElementById('mostik')&&ustanovitAnti) {
                 clearInterval(obnovDate)
                 useAnti()
                 last_minuty=minuty; 
             }
-
-    },timeRnd)
+        },timeRnd)
     
     }
-    let proverka =()=> {
-        let timeRnd = Math.floor(Math.random()*500)
-        let main = document.getElementsByName('mainWindow')[0].contentDocument;
-           var provPL = false;
-           let provEnki =(provPL)=>{
-               if(provPL){
-                   let enkaIsk = main.getElementById('Venergy').getAttribute('width')
-                   let enIsk = Number(enkaIsk)
-                            main = document.getElementsByName('mainWindow')[0].contentDocument;
-                            main.getElementById('iskinButtonII').click()
-                            let scripts = main.getElementsByTagName('script').length
-                    if (scripts<9){kontZamena()
-                        return
-                    }
-                   if (200 <= enIsk){
-                       setTimeout(()=>{
-                           let main = document.getElementsByName('mainWindow')[0].contentDocument;
-                           let kol = main.getElementById('total_req').textContent
-                           let urovIs = Number(main.getElementById('iskin_level').textContent)
-                           if ('3'===kol||iskDup[0]===urovIs&&'2'===kol||iskDup[1]===urovIs&&'2'===kol||iskDup[2]===urovIs&&'2'===kol){
-                           main.getElementById('start_but').click()
-                           let vremyaM = new Date().getMinutes()
-                           let vremyaS = new Date().getSeconds()
-                           zapiska[urovIsk]++
-                            }
-                           },500)
-                       setTimeout(dannye,1000+timeRnd)
-                   }else{
-                       let main = document.getElementsByName('mainWindow')[0].contentDocument;
-                       let kol = main.getElementById('total_req').textContent
-                       let urovIs = Number(main.getElementById('iskin_level').textContent)
-                       if ('3'===kol||iskDup[0]===urovIs&&'2'===kol||iskDup[1]===urovIs&&2<=kol||iskDup[2]===urovIs&&2<=kol){
-                       var opredAbil = main.getElementById('iskin_level').textContent
-                       if ('4'===opredAbil||'18'===opredAbil){
-                           if (200>ispolzAbil200){
-                           main.getElementById('img18').click()
-                               ispolzAbil200++
-                           }else if(abilkaGos>0){
-                               main.getElementById('scroll_365').click()
-                               abilkaGos--
-                           } else if(abilkaEkr>0){
-                               main.getElementById('scroll_586').click()
-                               abilkaEkr--
-                           }
-                       }else if('8'===opredAbil||'9'===opredAbil||'7'===opredAbil){
-                            if (50>ispolzAbil50){
-                           main.getElementById('img16').click()
-                                ispolzAbil50++
-                            } else if (220>ispolzAbil100){
-                           main.getElementById('img17').click()
-                               ispolzAbil100++
-                           }else if (200>ispolzAbil200){
-                            main.getElementById('img18').click()
-                                ispolzAbil200++
-                            }else if(abilkaGos>0){
-                               main.getElementById('scroll_365').click()
-                               abilkaGos--
-                           } else if(abilkaEkr>0){
-                               main.getElementById('scroll_586').click()
-                               abilkaEkr--
-                           }
-                       } else {
-                        if(220>ispolzAbil100){
-                           main.getElementById('img17').click()
-                        ispolzAbil100++
-                        } else if(ispolzAbil200<200){
-                           main.getElementById('img18').click()
-                           ispolzAbil200++
-                        }else if(abilkaGos>0){
-                           main.getElementById('scroll_365').click()
-                           abilkaGos--
-                        }else if(abilkaEkr>0){
-                           main.getElementById('scroll_586').click()
-                           abilkaEkr--
-                        } else {
-                            stoperInd=false;
-                        }
-                       }
-                      setTimeout(()=>{
-                           main.getElementById('start_but').click()
-                           
-                        //   let vremyaM = new Date().getMinutes()
-                        //   let vremyaS = new Date().getSeconds()
-                        //     
-                           zapiska[urovIsk]++
-                        if (urovIsk===iskinLimit) {
-                            limit--
-                            console.log(urovIsk +' : лимит '+ limit)
-                             if (limit<=0) {
-                             isklyuchit[2] = Number(urovIsk)
-                             }
-                        }
-                           },400)}
-                       if (stoperInd) {
-                       setTimeout(dannye,800+timeRnd)}
-                   }
-               }
-           }
-           let  provPlags =()=> {
-               /**     let main = document.getElementsByName('mainWindow')[0].contentDocument;
-                       var plaginy = main.querySelectorAll('.viod img')
-                       for (var pl = 0; pl < plaginy.length; pl++) {
-                           if (plaginy[pl].src !== 'http://img.starcombats.com/programs/void.gif') {
-                               provPL = true;
-                           } else {
-                               dannye()
-                               return
-                           }
-                       }*/
-               setTimeout(()=>{provPL=true
-                   provEnki(provPL)
-               },200)
-           }
-           let urovIsk='';
-           if (main.getElementById('iskin_level')) {
-         urovIsk = main.getElementById('iskin_level').textContent}
-         main = document.getElementsByName('mainWindow')[0].contentDocument;
-         let scripts = main.getElementsByTagName('script').length
-         if (scripts<9){
-                var script = document.createElement("script");
-                script.setAttribute("type", "text/javascript");
-                script.innerHTML = use_ability + '; ' + use_complect + '; ' + put_virus + '; ' + put_complect + ';' + use_scroll + '; ';
-                main.getElementsByTagName('body')[0].appendChild(script);}
-        switch (urovIsk) {
-            case '4':
-                main.getElementById('new_complects').querySelector('li:nth-child(1)').click()
-                setTimeout(provPlags,1500+timeRnd)
-                break
-            case '5':
-                main.getElementById('new_complects').querySelector('li:nth-child(2)').click()
-                setTimeout(provPlags,1500+timeRnd)
-                break
-            case '6':
-                main.getElementById('new_complects').querySelector('li:nth-child(3)').click()
-                setTimeout(provPlags,2500+timeRnd)
-                break
-            case '7':
-                //main.getElementById('new_complects').querySelector('li:nth-child(4)').click()
-                setTimeout(provPlags,2500+timeRnd)
-                break
-            case '8':
-                //main.getElementById('new_complects').querySelector('li:nth-child(5)').click()
-                setTimeout(provPlags,2500+timeRnd)
-                break
-            case '0':
-                setTimeout(()=>{provEnki(true)},2000+timeRnd)
-                break
-            default:
-                setTimeout(()=>{provEnki(true)},2000+timeRnd)
-                break
+    let proverka = () => {
+        let timeRnd = Math.floor(Math.random() * 500)+over_time;
+        let main = document.getElementsByName("mainWindow")[0].contentDocument;
+        var provPL = false;
+        let provEnki = (provPL) => {
+          if (provPL) {
+            main = document.getElementsByName("mainWindow")[0].contentDocument;
+          let energy = main.getElementById("Venergytext").textContent.split('/').map(Number).reduce((a,b)=> a/b)
+          
+            
+            main.getElementById("iskinButtonII").click();
+            let scripts = main.getElementsByTagName("script").length;
+            if (scripts < 9) {
+              kontZamena();
+              return;
+            }
+            if (0.9 <= energy) {
+              setTimeout(() => {
+                let main =
+                  document.getElementsByName("mainWindow")[0].contentDocument;
+                let kol = Number(main.getElementById("total_req").textContent);
+                let urovIs = Number(main.getElementById("iskin_level").textContent);
+                if (installation <= kol && iskDup.includes(urovIs)
+                ) {
+                  main.getElementById("start_but").click();
+                }
+              }, 500);
+              setTimeout(dannye,timeRnd+over_time);
+            } else {
+              let main =
+                document.getElementsByName("mainWindow")[0].contentDocument;
+              let kol = Number(main.getElementById("total_req").textContent);
+              let urovIs = Number(main.getElementById("iskin_level").textContent);
+              if (installation <= kol && iskDup.includes(urovIs)) {
                 
+               let energy = main.getElementById("Venergytext").textContent.split('/').map(Number).reduce((a,b)=> b - a); 
+               let proc = main.getElementById("Venergytext").textContent.split('/').map(Number)[1]*0.1;
+                 if(energy - proc <= 50 && abi_50 < limit_abil_50 ){
+                   abi_50++;
+                    main.getElementById('img16').click();
+                 } else if (energy - proc <= 100 && abi_100 < limit_abil_100){
+                   abi_100++;
+                   main.getElementById('img17').click();
+                 } else if (abi_200 < limit_abil_200){
+                   abi_200++;
+                   main.getElementById('img18').click();
+                 } else if (abilkaGos > 0 ){
+                   abilkaGos--;
+                   main.getElementById('scroll_365').click();
+                 } else if (abilkaEkr > 0 ){
+                   abilkaEkr--;
+                   main.getElementById('scroll_586').click();
+                 }
+                setTimeout(() => {
+                  main.getElementById("start_but").click();
+                }, timeRnd);
+              }
+              if (stoperInd) {
+                setTimeout(dannye,timeRnd);
+              }
+            }
+          }
+        };
+        let provPlags = () => {
+          setTimeout(() => {
+            provPL = true;
+            provEnki(provPL);
+          }, over_time);
+        };
+        let urovIsk = "";
+        if (main.getElementById("iskin_level")) {
+          urovIsk = main.getElementById("iskin_level").textContent;
         }
-        
-    }
+        main = document.getElementsByName("mainWindow")[0].contentDocument;
+        let scripts = main.getElementsByTagName("script").length;
+        if (scripts < 9) {
+          var script = document.createElement("script");
+          script.setAttribute("type", "text/javascript");
+          script.innerHTML =
+            use_ability +
+            "; " +
+            use_complect +
+            "; " +
+            put_virus +
+            "; " +
+            put_complect +
+            ";" +
+            use_scroll +
+            "; ";
+          main.getElementsByTagName("body")[0].appendChild(script);
+        }
+        switch (urovIsk) {
+          case "7":
+            if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(3)").click();
+            setTimeout(provPlags,timeRnd);
+            break;
+          case "8":
+            if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(4)").click();
+            setTimeout(provPlags,timeRnd);
+            break;
+          case "9":
+            if(with_plugins) main.getElementById("new_complects").querySelector("li:nth-child(5)").click();
+            setTimeout(provPlags,timeRnd);
+            break;
+          default:
+            setTimeout(() => {
+              provEnki(true);
+            },timeRnd);
+            break;
+        }
+      };
 
 
     let kontZamena=()=>{
@@ -1217,14 +1142,14 @@ function injected_main(){
                 let kol = Number(mainOkno.getElementById('total_req').textContent)
                let urovIs = Number(mainOkno.getElementById('iskin_level').textContent)
 
-                   if (3===kol || iskDup[0]===urovIs && 2<=kol || iskDup[1]===urovIs && 2<=kol || iskDup[2]===urovIs && 2<=kol) {
+                   if (installation <= kol && iskDup.includes(urovIs)) {
                        proverka()
                    } else {
                        dannye()
                    }
         },1000)} else {dannye()}
      }
-    setTimeout(kontZamena,4000)
+    setTimeout(kontZamena,3000+over_time)
 }
    // onclick="let kol=0;setInterval(()=>{if(100>kol){document.getElementById('but1').click(); kol++}else{clearInterval()}},1000)" сборки имплов или кристаллов в конверторе
 //&& iskDup[1]!==urovIs && iskDup[2]!==urovIs && iskDup[0]!==urovIs
