@@ -405,7 +405,7 @@ function injected_main(){
      shansInd = 6,
      dubleSector='',
      propusk = 0,
-     krugi = 7,
+     krugi = 6,
      triggerB = 0,
      energyHub = 0,
      firstTurn = false,

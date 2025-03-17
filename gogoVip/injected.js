@@ -39,17 +39,17 @@ function use_thing(obj_id, id)
 
                 if (slot_obj.func === 'true')
                 {
-                        var onclick = function () { use_thing_name(obj_id, id); return false; }
+                        let onclick = function () { use_thing_name(obj_id, id); return false; }
                         show_name_form(obj_id, id, onclick);
                 }
                 else if (slot_obj.func === 'joker')
                 {
-                        var onclick = function () { use_thing_name(obj_id, id); return false; }
+                        let onclick = function () { use_thing_name(obj_id, id); return false; }
                         show_joker_form(obj_id, id, onclick);
                 }
                 else
                 {
-                        var req = new Subsys_JsHttpRequest_Js();
+                        let req = new Subsys_JsHttpRequest_Js();
                         req.onreadystatechange = function()
                         {
                                 if (req.readyState == 4)
@@ -103,17 +103,17 @@ function use_scroll(obj_id, id)
                 slot_obj = document.getElementById(obj_id);
                 if (slot_obj.func === 'true')
                 {
-                        var onclick = function () { use_scroll_name(obj_id, id); return false; };
+                        let onclick = function () { use_scroll_name(obj_id, id); return false; };
                         show_name_form(obj_id, id, onclick);
                 }
                 else if (slot_obj.func === 'joker')
                 {
-                        var onclick = function () { use_scroll_name(obj_id, id); return false; };
+                        let onclick = function () { use_scroll_name(obj_id, id); return false; };
                         show_joker_form(obj_id, id, onclick);
                 }
                 else
                 {
-                        var req = new Subsys_JsHttpRequest_Js();
+                        let req = new Subsys_JsHttpRequest_Js();
                         req.onreadystatechange = function()
                         {
                                 if (req.readyState == 4)
@@ -163,7 +163,7 @@ function use_ability(obj_id, id, func, new_name)
 {
         if (func == 'true' && typeof(new_name) == 'undefined')
         {
-                var onclick = function () { use_ability(obj_id, id, func, 1); return false; }
+                let onclick = function () { use_ability(obj_id, id, func, 1); return false; }
                 show_name_form(obj_id, id, onclick);
                 return false;
         }
@@ -176,7 +176,7 @@ function use_ability(obj_id, id, func, new_name)
         }
         else new_name = '';
 
-                var req = new Subsys_JsHttpRequest_Js();
+                let req = new Subsys_JsHttpRequest_Js();
                 req.onreadystatechange = function()
                 {
                         if (req.readyState == 4)
@@ -240,7 +240,7 @@ function use_scroll_name(obj_id, id)
         if (!block_set) set_block(1 + Math.floor(Math.random() * 4));
         form_block = block_zone[self['points_to_block']][block_num];
 
-        var req = new Subsys_JsHttpRequest_Js();
+        let req = new Subsys_JsHttpRequest_Js();
         req.onreadystatechange = function()
         {
                 if (req.readyState == 4)
@@ -297,7 +297,7 @@ function use_thing_name(obj_id, id)
         if (!block_set) set_block(1 + Math.floor(Math.random() * 4));
         form_block = block_zone[self['points_to_block']][block_num];
 
-        var req = new Subsys_JsHttpRequest_Js();
+        let req = new Subsys_JsHttpRequest_Js();
         req.onreadystatechange = function()
         {
                 if (req.readyState == 4)
@@ -402,7 +402,7 @@ function show_info(self)
       if (document.getElementById("check_input") != null) check_code = document.getElementById("check_input").value;
       else check_code = '';
 
-      var req = new JsHttpRequest();
+      let req = new JsHttpRequest();
       req.onreadystatechange = function()
       {
         if(req.readyState == 4)
@@ -436,7 +436,7 @@ function show_info(self)
 function delete_other(id, new_name)
 {
         
-                var req = new Subsys_JsHttpRequest_Js()
+                let req = new Subsys_JsHttpRequest_Js()
                 req.onreadystatechange = function()
                 {
                         if (req.readyState == 4)
@@ -481,10 +481,10 @@ function injected_main(){
                 obrabotka()
         } else if (imgObekt[1].src==='http://img.starcombats.com/map/cor/right_on.gif'){
                 vPravo.click()
-                obrabotka()
+                setTimeout(prohod,2000)
         } else if (imgObekt[0].src==='http://img.starcombats.com/map/cor/left_on.gif'){
                 vLevo.click()
-                obrabotka()
+                setTimeout(prohod,2000)
         }
 
     }
@@ -492,27 +492,22 @@ function injected_main(){
     let udalenie =()=>{
         let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
         let panelMenu = document.getElementsByName('menuWindow')[0].contentDocument;
-        let navigBtn = panelMenu.querySelector('.right img:last-of-type')
         let iskomoe;
-        let iskomoeKol = 0;
         let iskomoeName = "Пустой контейнер";
         let obshee = mainOkno.querySelectorAll('.item');
-
-          let scripts = mainOkno.getElementsByTagName('script').length
-                                 
-                                 var script = document.createElement("script");
+                                 let script = document.createElement("script");
                                  script.setAttribute("type", "text/javascript");
                                  script.innerHTML = delete_other ;
                                  mainOkno.getElementsByTagName('head')[0].appendChild(script);
         setTimeout(()=>{
-        for (var i = obshee.length - 1; i >= 0; i--) {
+        for (let i = obshee.length - 1; i >= 0; i--) {
 
-          var block = obshee[i]
+          let block = obshee[i]
           if (block.querySelector('h1').textContent === iskomoeName){
             iskomoe = block;
             }
         }   
-         var delBtn = iskomoe.querySelector('tr:nth-child(2) td:nth-child(4) img')
+         let delBtn = iskomoe.querySelector('tr:nth-child(2) td:nth-child(4) img')
           
           if (delBtn) {
           delBtn.click()
@@ -525,7 +520,7 @@ function injected_main(){
         let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
         let menu_win = document.getElementsByName('menuWindow')[0].contentDocument;
         if (main_win.querySelectorAll('script').length<9){
-        var script = document.createElement("script");
+        let script = document.createElement("script");
                 script.setAttribute("type", "text/javascript");
                 script.innerHTML = use_action ; 
                 main_win.getElementsByTagName('body')[0].appendChild(script);
@@ -550,9 +545,9 @@ function injected_main(){
         let mostik = down_bar.getElementById('bridge_btn')
         mostik.click()
         setTimeout(() => {
-                var main_win = document.getElementsByName('mainWindow')[0].contentDocument;
+                let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
                 
-                var chansClick = main_win.getElementById('img22')
+                let chansClick = main_win.getElementById('img22')
                 chansClick.click()
                 setTimeout(() => {
                     let useChans = main_win.querySelector('#info_div_content a:first-of-type')
@@ -568,11 +563,11 @@ function injected_main(){
     }
 
     const rubkaZadanie =()=>{
-        let interRnd = Math.floor(Math.random()*3000);
+        let interRnd = Math.floor(Math.random()*2000);
         let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
         let compMenu = main_win.querySelectorAll('.item a')
         compMenu[4].click()
-        let obrabotkaZadan = setInterval(()=>{
+        setTimeout(()=>{
                 main_win = document.getElementsByName('mainWindow')[0].contentDocument;
                 let vyborZadan = main_win.querySelectorAll('#items_div img')
                 if (vyborZadan.length===1) {
@@ -586,25 +581,25 @@ function injected_main(){
                 setTimeout(()=>{
                         main_win = document.getElementsByName('mainWindow')[0].contentDocument;
                    vyborZadan = main_win.querySelectorAll('#items_div img')
-                   vyborZadan[10].click();     
+                   vyborZadan[10]?.click();     
                 },1062)
                 setTimeout(()=>{
                         main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-                        main_win.getElementById('button').click();
+                        main_win.getElementById('button')?.click();
                         setTimeout(()=>{
                                 main_win = document.getElementsByName('mainWindow')[0].contentDocument;
-                                clearInterval(obrabotkaZadan);
-                                main_win.querySelector('a').click();
+                                main_win?.querySelector('a')?.click();
                                 zadanie=true;
                                 obrabotka();
+                                clearTimeout()
                         },interRnd+1523)
                 },interRnd+2132)
                 }
-        },interRnd+3561)   
+        },interRnd+2561)   
     }
 
     const obrabotka =()=>{
-        let interRnd = Math.floor(Math.random()*2500)+3500;
+let interRnd = Math.floor(Math.random()*1500)+4500;
         
        let obshiyCont = setInterval(()=>{
            
@@ -674,55 +669,49 @@ function injected_main(){
                         }
 
             } else if (triggerFoggy||triggerTele) {
-                main_win = document.getElementsByName('mainWindow')[0].contentDocument;
+                let main_win = document.getElementsByName('mainWindow')[0].contentDocument;
                 let locationsMain = main_win.querySelectorAll(".menu a");
-                let locatSeych = [];
-                for (var i = 0;i <= locationsMain.length-1; i++) {
-                       var locname = locationsMain[i]
-                       locatSeych.push(locname.textContent)
-                }
+                let locatSeych = [...locationsMain].map(elem => elem.textContent);
                 let triggerComp = main_win.querySelectorAll('img')[9]
                  triggerTele = main_win.querySelector('#title img')
 
-                if (zadanie) {
-                        
-                        if (locatSeych[2]==='Орбита Станции') {
-                                var loc4 = locationsMain[0]
+                if (zadanie && locatSeych.length > 0) {
+                        if (main_win.location.href === 'http://foggystation.starcombats.com/locations/teleport.php') {
+                                let loc4 = locationsMain[0]
                                 loc4.click()
-                        } else if (locatSeych[0]==='Периметр') {
-                                var loc5 = locationsMain[6]
+                        } else if (main_win.location.href === 'http://foggystation.starcombats.com/locations/mainsquare.php') {
+                                let loc5 = locationsMain[6]
                                 loc5.click()
-                        } else if (locatSeych[1]==='Центральный Компьютер') {
-                                var loc6 = locationsMain[4]
+                        } else if (main_win.location.href === 'http://foggystation.starcombats.com/locations/engineering.php') {
+                                let loc6 = locationsMain[4]
                                 loc6.click()
-                        } else if (triggerTele.src==='http://img.starcombats.com/locations/varp/title_rus.gif') {
-                                
-                                let teleportOtpravki = main_win.querySelectorAll('.forlink a')
-                                for (var i = 0; i < teleportOtpravki.length; i++) {
-                                        var otpravka = teleportOtpravki[i]
-                                        if (otpravka.textContent === 'Миссия "Спасение торговца"') {
-                                               otpravka.click();
-                                                return   
-                                        }
-                                }
-                                
-                                
-                        }
-                } else {
+                        } 
+                } else if (locatSeych.length > 0) {
                         if (locatSeych[2]==='Орбита Станции') {
-                                var loc1 = locationsMain[2]
+                                let loc1 = locationsMain[2]
                                 loc1.click()
                         } else if (locatSeych[0]==='Периметр') {
-                                var loc2 = locationsMain[4]
+                                let loc2 = locationsMain[4]
                                 loc2.click()
                         } else if (locatSeych[1]==='Центральный Компьютер') {
-                                var loc3 = locationsMain[1]
+                                let loc3 = locationsMain[1]
                                 loc3.click()
-                        } else if (triggerComp.src==="http://img.starcombats.com/locations/computer/head_rus.jpg") {
+                        }
+                        
+                } else if (triggerComp.src==="http://img.starcombats.com/locations/computer/head_rus.jpg") {
                              clearInterval(obshiyCont);
                              rubkaZadanie();   
-                        } 
-                }
+                } else if (triggerTele.src === 'http://img.starcombats.com/locations/varp/title_rus.gif') {
+                        let teleportOtpravki = main_win.querySelectorAll('.forlink a')
+                        for (let i = 0; i < teleportOtpravki.length; i++) {
+                                let otpravka = teleportOtpravki[i]
+                                if (otpravka.textContent === 'Миссия "Спасение торговца"') {
+                                       otpravka.click();
+                                        return   
+                                }
+                        }
+                } 
+                
                 
             } else { let navigBtn = menu_win.querySelector('.right img:last-of-type')
                                 navigBtn.click()}

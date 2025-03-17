@@ -675,7 +675,7 @@ function injected_main(){
                
                if(messageOkno&&messageOkno.style.visibility === "visible"){
                let textInfoWin = main_win.getElementById('infoWindowMessage').textContent
-               let viborkaTexta 
+               let viborkaTexta = textInfoWin?.split(' ', 1).join();
                
                switch (viborkaTexta) {
                    case "Бой":
