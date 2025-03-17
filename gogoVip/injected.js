@@ -575,6 +575,7 @@ function injected_main(){
                         setTimeout(()=>{
                                 main_win = document.getElementsByName('mainWindow')[0].contentDocument;
                              main_win.getElementById('button').click();   
+                             rubkaZadanie()
                         },2143)
                 } else {
                 compMenu[0].click()
@@ -591,7 +592,6 @@ function injected_main(){
                                 main_win?.querySelector('a')?.click();
                                 zadanie=true;
                                 obrabotka();
-                                clearTimeout()
                         },interRnd+1523)
                 },interRnd+2132)
                 }
