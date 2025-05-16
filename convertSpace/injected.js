@@ -13,9 +13,7 @@ function injected_main(){
 		 oknoOtscheta = mainOko.getElementById('infoWindow');
 		// СБОРКИ
 		const [krupDetal,stroyMod,znakDarkGet,znakSvetGet] = elementsSbor;
-		// let stroyMod = elementsSbor[1];
-		// let znakDarkGet = elementsSbor[2];
-		// let znakSvetGet = elementsSbor[3];
+		
 		// ЗАПЧАСТИ СБОРОК
 		const melDet = Number(dropElements[7].textContent),
 		 znakDark = Number(dropElements[1].textContent),
@@ -54,7 +52,7 @@ function injected_main(){
 			} else if(oblomAstron > 9 && oblomok > 9){
 				znakDarkGet.click()
 				setTimeout(()=>{
-					mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
+					let mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
 					let usingBtn = mainOko.querySelector('#but1');
 					usingBtn.click();
 					setTimeout(()=>{
@@ -107,8 +105,7 @@ function injected_main(){
 							ustanovka();
 						},timeRn+2000)
 					},timeRn+1000)
-				} else if (timeSborki.textContent[0] === 'И') {
-					console.log(timeSborki.textContent.split(' ')[0])
+				} else if (timeSborki.textContent.split(' ')[0] === 'Идет') {
 					setTimeout(otsled,timeRn + 2000)
 				}
 			} else {

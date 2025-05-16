@@ -402,14 +402,14 @@ function show_info(self)
 function injected_main(){
     let hil5000 = 0,
      hil3000 = 0,
-     shansInd = 6,
+     shansInd = 0,
      dubleSector='',
      propusk = 0,
-     krugi = 6,
+     krugi = 7,
      triggerB = 0,
      energyHub = 0,
      firstTurn = false,
-     secondTurn = true,
+     secondTurn = false,
      dubleTime = 24;
     const funShans =()=>{
         let main_win = document.getElementsByName('mainWindow')[0].contentDocument;

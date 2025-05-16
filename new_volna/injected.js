@@ -200,7 +200,7 @@ function injected_main() {
     triggerB = 0,
     turn = 0,
     vip = true;
-  let quest = 2; // 0 - волна, 1 - ледяное кольцо, 2 = Древние порталы, 3 = Орфей;
+  let quest = 1; // 0 - волна, 1 - ледяное кольцо, 2 = Древние порталы, 3 = Орфей;
   let hod = (dateInterval) => {
     clearInterval(dateInterval);
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;

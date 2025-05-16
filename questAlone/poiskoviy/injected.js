@@ -466,20 +466,57 @@ function injected_main() {
   let dubleSector;
   let dubleSectorPoint = 0;
   // номер поискового 386
-  const questNum = 1; // номер поискового...
+  const questNum = 4; // номер поискового...
   const passing = true; // прохождение.
-  const limitOfCountainers = 39;
+  const limitOfCountainers = 41;
   let kolKont = 0,
-   trigger1 = 0,
-   trigger1_2 = 0,
-   trigger2 = 0,
-   trigger3 = 0,
-   trigger4 = 0,
-   trigger5 = 0,
-   triggerB = 0,
-   trigger6 = 0;
+    trigger1 = 0,
+    trigger1_2 = 0,
+    trigger2 = 0,
+    trigger3 = 0,
+    trigger4 = 0,
+    trigger5 = 0,
+    triggerB = 0,
+    trigger6 = 0;
+
+  const sectors = {
+    first: { right : [
+          "1051E", "2051E", "1052N", "1053E","1055N", "1056E", "3056S", "4054S",
+          "6052S", "6050W", "5050N", "4052N", "4053E", "7056S", "7051N", "10054W",
+          "5058N", "4058W", "2057W", "1057N", "1065E", "2065S", "4061E", "7061S",
+          "9060N", "8062W", "6061W", "5061N", "4064N", "3065N", "2066N", "1067N",
+          "1068E", "2071N", "1072N", "1073E", "3073N", "3074E", "6074S", "9073S",
+          "9072W", "9069S", "5071E", "9071S", "9067W", "5067N", "8069N", "6073N",
+          "3072W", "2068W", "2067S", "9064S", "10060S", "8056N", "6053W", "3066S"
+        ], left : [
+          "3051S", "3052E", "2053S", "2055E", "3054W", "5052E" ,"6053S", "7051W", "7056E",
+          "5059E", "4059N", "2058N", "2060W", "4060S", "7059W" ,"10059S", "10060E",
+          "9063E", "8063N", "6062N", "5064E", "4065E", "3066E" ,"2067E", "2068S",
+          "2069E", "3069S", "3071E", "2072E", "6073W", "4072N" ,"4069N", "5069S",
+          "4066W", "10066S", "10072E", "9073E", "6074E", "3074N" ,"1068N", "1067W",
+          "2066W", "7065N", "7064W", "9060W", "3065W", "9056E" ,"8058E", "1053N",
+          "6058E", "8070E", "6070N", "6068W", "8068S", "9054N"
+        ], reverse : [
+          "2050W","4051W","10051S","4056N","1069N","4073S","8065S","9053W","1050W"
+        ], points : [
+
+        ]
+      },
+    second:{
+      right : [
+
+      ], left : [
+        
+      ], revers : [
+        
+      ], points : [
+
+      ]
+    }
+  };
+  
   let hod = () => {
-   clearTimeout();
+    clearTimeout();
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
     let panelMenu = document.getElementsByName("menuWindow")[0].contentDocument;
     let sector = mainOkno.querySelector("#sector").textContent;
@@ -1273,7 +1310,7 @@ function injected_main() {
           case "3066S":
           case "10054W":
             pravo.click();
-            setTimeout(hod, 1000+timeRand);
+            setTimeout(hod, 1000 + timeRand);
             break;
           case "3051S":
           case "3052E":
@@ -1331,7 +1368,7 @@ function injected_main() {
           case "8068S":
           case "9054N":
             levo.click();
-            setTimeout(hod, 1000+timeRand);
+            setTimeout(hod, 1000 + timeRand);
             break;
           case "2050W":
           case "4051W":
@@ -1343,7 +1380,7 @@ function injected_main() {
           case "9053W":
           case "1050W":
             razvorot.click();
-            setTimeout(hod, 1000+timeRand);
+            setTimeout(hod, 1000 + timeRand);
             break;
           case "2051S":
           case "4052E":
@@ -1352,11 +1389,11 @@ function injected_main() {
           case "8069E":
             if (trigger1 === 0) {
               pravo.click();
-              setTimeout(hod, 1000+timeRand);
+              setTimeout(hod, 1000 + timeRand);
               trigger1 = 1;
             } else {
               dalshe.click();
-              setTimeout(obnovit, 4000+timeRand);
+              setTimeout(obnovit, 4000 + timeRand);
               trigger1 = 0;
             }
             break;
@@ -1364,73 +1401,73 @@ function injected_main() {
           case "5069E":
             if (trigger2 === 0) {
               levo.click();
-              setTimeout(hod, 1000+timeRand);
+              setTimeout(hod, 1000 + timeRand);
               trigger2 = 1;
             } else {
               dalshe.click();
-              setTimeout(obnovit, 3500+timeRand);
+              setTimeout(obnovit, 3500 + timeRand);
               trigger2 = 0;
             }
             break;
           case "6056S":
             if (trigger3 === 0) {
               dalshe.click();
-              setTimeout(obnovit, 3500+timeRand);
+              setTimeout(obnovit, 3500 + timeRand);
               trigger3 = 1;
             } else {
               levo.click();
-              setTimeout(hod, 1000+timeRand);
+              setTimeout(hod, 1000 + timeRand);
               trigger3 = 0;
             }
             break;
           case "9072N":
             if (trigger6 === 0) {
               dalshe.click();
-              setTimeout(obnovit, 3500+timeRand);
+              setTimeout(obnovit, 3500 + timeRand);
               trigger6 = 1;
             } else {
               pravo.click();
-              setTimeout(hod, 1000+timeRand);
+              setTimeout(hod, 1000 + timeRand);
               trigger6 = 0;
             }
             break;
           case "6058N":
             if (trigger4 === 0) {
               dalshe.click();
-              setTimeout(obnovit, 3500+timeRand);
+              setTimeout(obnovit, 3500 + timeRand);
               trigger4 = 1;
             } else {
               levo.click();
-              setTimeout(hod, 1000+timeRand);
+              setTimeout(hod, 1000 + timeRand);
               trigger4 = 0;
             }
-            break
+            break;
           case "2072N":
             if (trigger5 === 0) {
               dalshe.click();
-              setTimeout(obnovit, 3500+timeRand);
+              setTimeout(obnovit, 3500 + timeRand);
               trigger5 = 1;
             } else {
               levo.click();
-              setTimeout(hod, 1000+timeRand);
+              setTimeout(hod, 1000 + timeRand);
               trigger5 = 0;
             }
-            break
+            break;
           default:
             dalshe.click();
-            setTimeout(obnovit, 3500+timeRand);
+            setTimeout(obnovit, 3500 + timeRand);
             break;
         }
       }
     } else {
       dubleSectorPoint = 0;
       navigBtn.click();
-      setTimeout(obnovit, 1000+timeRand);
+      setTimeout(obnovit, 1000 + timeRand);
     }
   };
 
   let boy = () => {
-        clearTimeout()
+    clearTimeout();
     triggerB = 0;
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
     let panelMenu = document.getElementsByName("menuWindow")[0].contentDocument;
@@ -1450,7 +1487,7 @@ function injected_main() {
     if (messageOkno && messageOkno.style.visibility === "visible") {
       let textInfoWin =
         mainOkno.getElementById("infoWindowMessage").textContent;
-      let viborkaTexta = textInfoWin?.split(' ', 1).join();
+      let viborkaTexta = textInfoWin?.split(" ", 1).join();
 
       switch (viborkaTexta) {
         case "Бой":
@@ -1462,7 +1499,7 @@ function injected_main() {
           break;
         case "Ожидание":
           panelMenu.querySelector(".right img:last-child").click();
-          setTimeout(boy, 1000+obnovRn);
+          setTimeout(boy, 1000 + obnovRn);
           break;
         default:
           setTimeout(obnovit, obnovRn);
@@ -1474,13 +1511,15 @@ function injected_main() {
       let autoboy = mainOkno.querySelector(
         "#new_centerBlock_footer tr:nth-child(2) td:nth-child(2) img"
       );
-      if(autoboy){autoboy.click()};
+      if (autoboy) {
+        autoboy.click();
+      }
       setTimeout(obnovit, obnovRn);
     }
   };
 
   let testAuto = () => {
-     clearTimeout();
+    clearTimeout();
     let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
     let panelMenu = document.getElementsByName("menuWindow")[0].contentDocument;
     let navigBtn = panelMenu.querySelector(".right img:last-of-type");
@@ -1488,9 +1527,9 @@ function injected_main() {
     let iskomoeKol = 0;
     let iskomoeName = "Контейнер с запчастями";
     let obshee = mainOkno.querySelectorAll(".item");
-    if(!obshee){
-      obnovit()
-      return
+    if (!obshee) {
+      obnovit();
+      return;
     }
     // let scripts = mainOkno.getElementsByTagName("script").length;
 
@@ -1525,178 +1564,171 @@ function injected_main() {
   };
 
   let obnovit = () => {
-        clearTimeout()
+    clearTimeout();
     let timeRand = Math.floor(Math.random() * 500) + 1500;
     //     let dateInterval = setInterval(() => {
-      let mainOkno =
-        document.getElementsByName("mainWindow")[0].contentDocument;
-      let panelMenu =
-        document.getElementsByName("menuWindow")[0].contentDocument;
+    let mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
+    let panelMenu = document.getElementsByName("menuWindow")[0].contentDocument;
 
-      let navigBtn = panelMenu.querySelector(".right img:last-of-type");
-      let sector = mainOkno.querySelector("#sector");
-      if (kolKont >= limitOfCountainers && sector !== null && !passing) {
-        let trumeBtn = panelMenu.querySelector("#menu1 img:nth-child(8)");
-        trumeBtn.click();
-        setTimeout(obnovit,timeRand)
-      } else if (sector != null || sector != undefined) {
-        let oblomki = [
-          mainOkno.querySelector("#obj_front"),
-          mainOkno.querySelector("#obj_left"),
-          mainOkno.querySelector("#obj_right"),
-        ];
-        let oblomok;
-        for (var i = 0; i < oblomki.length; i++) {
-          let imgObekt = oblomki[i].firstChild.src;
-          var nonOblom = oblomki[i];
-          if (
-            nonOblom.style.display === "block" &&
-            imgObekt === "http://img.starcombats.com/map/obj/chelnok_01.gif"
-          ) {
-            let chatOkno =
-              document.getElementsByName("chatWindow")[0].contentDocument;
-            let soobsheniya = chatOkno.getElementById("content_rus");
-            let data = " обменник мелькнул " + sector.textContent;
-            var div = document.createElement("div");
-            div.setAttribute("class", "postmessage");
-            div.innerHTML = data;
-            soobsheniya.appendChild(div);
+    let navigBtn = panelMenu.querySelector(".right img:last-of-type");
+    let sector = mainOkno.querySelector("#sector");
+    if (kolKont >= limitOfCountainers && sector !== null && !passing) {
+      let trumeBtn = panelMenu.querySelector("#menu1 img:nth-child(8)");
+      trumeBtn.click();
+      setTimeout(obnovit, timeRand);
+    } else if (sector != null || sector != undefined) {
+      let oblomki = [
+        mainOkno.querySelector("#obj_front"),
+        mainOkno.querySelector("#obj_left"),
+        mainOkno.querySelector("#obj_right"),
+      ];
+      let oblomok;
+      for (var i = 0; i < oblomki.length; i++) {
+        let imgObekt = oblomki[i].firstChild.src;
+        var nonOblom = oblomki[i];
+        if (
+          nonOblom.style.display === "block" &&
+          imgObekt === "http://img.starcombats.com/map/obj/chelnok_01.gif"
+        ) {
+          let chatOkno =
+            document.getElementsByName("chatWindow")[0].contentDocument;
+          let soobsheniya = chatOkno.getElementById("content_rus");
+          let data = " обменник мелькнул " + sector.textContent;
+          var div = document.createElement("div");
+          div.setAttribute("class", "postmessage");
+          div.innerHTML = data;
+          soobsheniya.appendChild(div);
+        }
+        if (i === 0) {
+          switch (imgObekt) {
+            case "http://img.starcombats.com/map/obj/hunter.gif":
+            case "http://img.starcombats.com/map/obj/dron01.gif":
+            case "http://img.starcombats.com/map/obj/chelnok_01.gif":
+              nonOblom = oblomki[i];
+              if (nonOblom.style.display === "block") {
+                oblomok = nonOblom.firstChild;
+              }
+              break;
+            default:
+              if (nonOblom.style.display === "block") {
+                oblomok = nonOblom.firstChild;
+              }
+              break;
           }
-          if (i === 0) {
-            switch (imgObekt) {
-              case "http://img.starcombats.com/map/obj/hunter.gif":
-              case "http://img.starcombats.com/map/obj/dron01.gif":
-              case "http://img.starcombats.com/map/obj/chelnok_01.gif":
-                nonOblom = oblomki[i];
-                if (nonOblom.style.display === "block") {
-                  oblomok = nonOblom.firstChild;
-                }
-                break;
-              default:
-                if (nonOblom.style.display === "block") {
-                  oblomok = nonOblom.firstChild;
-                }
-                break;
-            }
-          } else if (
-            imgObekt !== "http://img.starcombats.com/map/obj/hunter.gif" &&
-            imgObekt !== "http://img.starcombats.com/map/obj/dron01.gif" &&
-            imgObekt !== "http://img.starcombats.com/map/obj/chelnok_01.gif"
-          ) {
-            nonOblom = oblomki[i];
-            if (nonOblom.style.display === "block") {
-              oblomok = nonOblom.firstChild;
-            }
+        } else if (
+          imgObekt !== "http://img.starcombats.com/map/obj/hunter.gif" &&
+          imgObekt !== "http://img.starcombats.com/map/obj/dron01.gif" &&
+          imgObekt !== "http://img.starcombats.com/map/obj/chelnok_01.gif"
+        ) {
+          nonOblom = oblomki[i];
+          if (nonOblom.style.display === "block") {
+            oblomok = nonOblom.firstChild;
           }
         }
+      }
 
-        let ataka = (oblomok) => {
-          oblomok.click();
-          setTimeout(() => {
-            mainOkno =
-              document.getElementsByName("mainWindow")[0].contentDocument;
-
-            if (triggerB <= 1) {
-              mainOkno.getElementById("item1").click();
-            }
-            setTimeout(() => {
-              if (
-                oblomok.src ===
-                  "http://img.starcombats.com/map/obj/hunter.gif" ||
-                oblomok.src ===
-                  "http://img.starcombats.com/map/obj/broken_cargo.gif"
-              ) {
-                navigBtn.click();
-                triggerB++;
-              }
-              setTimeout(obnovit, 2000+timeRand)
-            }, timeRand);
-          }, timeRand);
-        };
-        let ataka2 = (oblomok) => {
-          oblomok.click();
-          setTimeout(() => {
-            let mainOkn =
-              document.getElementsByName("mainWindow")[0].contentDocument;
-            let activBtn;
-            let activBtns = [
-              mainOkn.getElementById("item3"),
-              mainOkn.getElementById("item2"),
-              mainOkn.getElementById("item1"),
-            ];
-            for (var i = 0; i < activBtns.length; i++) {
-              let actBtn = activBtns[i];
-              if (actBtn.textContent === "Обменять контейнеры") {
-                activBtn = actBtn;
-              }
-            }
-            if (activBtn !== null) {
-              activBtn.click();
-            }
-
-            setTimeout(() => {
-              if (
-                oblomok.src ===
-                  "http://img.starcombats.com/map/obj/hunter.gif" ||
-                oblomok.src ===
-                  "http://img.starcombats.com/map/obj/broken_cargo.gif"
-              ) {
-                navigBtn.click();
-              }
-            }, timeRand);
-          }, timeRand);
-        };
-
-        if (!oblomok) {
-          setTimeout(hod,timeRand);
-        } else {
-          if (
-            oblomok.src === "http://img.starcombats.com/map/obj/broken_ship.gif"
-          ) {
-            kolKont++;
-          }
-          if (
-            kolKont >= limitOfCountainers &&
-            oblomok.src ===
-              "http://img.starcombats.com/map/obj/chelnok_01.gif" &&
-            passing
-          ) {
-            ataka2(oblomok);
-          } else {
-            ataka(oblomok);
-          }
-        }
-      } else if (mainOkno.getElementById("achange")) {
-        let mainOkno =
-          document.getElementsByName("mainWindow")[0].contentDocument;
-        let scripts = mainOkno.getElementsByTagName("script").length;
-
-        if (scripts < 8) {
-          var script = document.createElement("script");
-          script.setAttribute("type", "text/javascript");
-          script.innerHTML =
-            use_thing + "; " + use_scroll + "; " + use_ability + ";";
-          mainOkno.getElementsByTagName("head")[0].appendChild(script);
-        }
-        boy();
-      } else if (mainOkno.getElementById("overall_damage_min")) {
-        // clearInterval(dateInterval);
+      let ataka = (oblomok) => {
+        oblomok.click();
         setTimeout(() => {
           mainOkno =
             document.getElementsByName("mainWindow")[0].contentDocument;
-          let gruze = mainOkno.querySelector(".cats a:last-child");
-          gruze.click();
+
+          if (triggerB <= 1) {
+            mainOkno.getElementById("item1").click();
+          }
           setTimeout(() => {
-            testAuto();
-          }, 1000+timeRand);
-        },timeRand);
+            if (
+              oblomok.src === "http://img.starcombats.com/map/obj/hunter.gif" ||
+              oblomok.src ===
+                "http://img.starcombats.com/map/obj/broken_cargo.gif"
+            ) {
+              navigBtn.click();
+              triggerB++;
+            }
+            setTimeout(obnovit, 2000 + timeRand);
+          }, timeRand);
+        }, timeRand);
+      };
+      let ataka2 = (oblomok) => {
+        oblomok.click();
+        setTimeout(() => {
+          let mainOkn =
+            document.getElementsByName("mainWindow")[0].contentDocument;
+          let activBtn;
+          let activBtns = [
+            mainOkn.getElementById("item3"),
+            mainOkn.getElementById("item2"),
+            mainOkn.getElementById("item1"),
+          ];
+          for (var i = 0; i < activBtns.length; i++) {
+            let actBtn = activBtns[i];
+            if (actBtn.textContent === "Обменять контейнеры") {
+              activBtn = actBtn;
+            }
+          }
+          if (activBtn !== null) {
+            activBtn.click();
+          }
+
+          setTimeout(() => {
+            if (
+              oblomok.src === "http://img.starcombats.com/map/obj/hunter.gif" ||
+              oblomok.src ===
+                "http://img.starcombats.com/map/obj/broken_cargo.gif"
+            ) {
+              navigBtn.click();
+            }
+          }, timeRand);
+        }, timeRand);
+      };
+
+      if (!oblomok) {
+        setTimeout(hod, timeRand);
       } else {
-        // let navigBtn = panelMenu.querySelector(".right img:last-of-type");
-        // navigBtn.click();
-        setTimeout(obnovit, 5000+timeRand);
+        if (
+          oblomok.src === "http://img.starcombats.com/map/obj/broken_ship.gif"
+        ) {
+          kolKont++;
+        }
+        if (
+          kolKont >= limitOfCountainers &&
+          oblomok.src === "http://img.starcombats.com/map/obj/chelnok_01.gif" &&
+          passing
+        ) {
+          ataka2(oblomok);
+        } else {
+          ataka(oblomok);
+        }
       }
-//     }, timeRand);
-     
+    } else if (mainOkno.getElementById("achange")) {
+      let mainOkno =
+        document.getElementsByName("mainWindow")[0].contentDocument;
+      let scripts = mainOkno.getElementsByTagName("script").length;
+
+      if (scripts < 8) {
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        script.innerHTML =
+          use_thing + "; " + use_scroll + "; " + use_ability + ";";
+        mainOkno.getElementsByTagName("head")[0].appendChild(script);
+      }
+      boy();
+    } else if (mainOkno.getElementById("overall_damage_min")) {
+      // clearInterval(dateInterval);
+      setTimeout(() => {
+        mainOkno = document.getElementsByName("mainWindow")[0].contentDocument;
+        let gruze = mainOkno.querySelector(".cats a:last-child");
+        gruze.click();
+        setTimeout(() => {
+          testAuto();
+        }, 1000 + timeRand);
+      }, timeRand);
+    } else {
+      // let navigBtn = panelMenu.querySelector(".right img:last-of-type");
+      // navigBtn.click();
+      setTimeout(obnovit, 5000 + timeRand);
+    }
+    //     }, timeRand);
   };
   setTimeout(obnovit, 5000);
 }

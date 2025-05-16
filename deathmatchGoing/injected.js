@@ -2,8 +2,8 @@
 
 function injected_main(){
   let dubleSector, propusk;
-  const centGor = 52,
-        centVer = 5; 
+  const centGor = 53,
+        centVer = 7; 
   const konecTime = 60;
         const deystvie =()=>{
                 const main_win = document.getElementsByName('mainWindow')[0].contentDocument,
@@ -79,7 +79,7 @@ function injected_main(){
                                         dalshe.click()
                                 } else if (gorizont>centGor&&levo) {
                                         vLevo.click()
-                                } else if (gorizont<centVer&&!pravo&&pryamo) {
+                                } else if (gorizont>centVer&&!pravo&&pryamo) {
                                         dalshe.click()
                                 } else if (gorizont<centGor&&pravo) {
                                         vPravo.click()

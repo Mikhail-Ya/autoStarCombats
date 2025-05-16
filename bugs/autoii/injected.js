@@ -1,4 +1,3 @@
-
 function put_complect(id, new_name) {
   var req = new Subsys_JsHttpRequest_Js();
   req.onreadystatechange = function () {
@@ -176,8 +175,15 @@ function injected_main() {
   let povtorVrem = 24;
   let povtorVrem1 = 24;
   let last_minuty = 0;
-  let isklyuchit = [19, 7, 18]; // искинов какого уровня не ищем
-  let iskDup = [15, 17, 18]; // какие искины ставятся третьими
+  let isklyuchit = [9, 8, 7];
+  const complect = {
+    '11': 1,
+    '2': 2,
+    '7': 3,
+    '8': 4,
+    '9': 5,
+  } 
+  let iskDup = [15]; // какие искины ставятся третьими
   let limit = 23;
   let iskinLimit = "13";
   let ustanovitAnti = true;
@@ -541,22 +547,14 @@ function injected_main() {
           kontZamena();
           return;
         }
-        if (
-          (3 === kol && iskDup[1] === urovIs) ||
-          (3 === kol && iskDup[0] === urovIs) ||
-          (3 === kol && iskDup[2] === urovIs)
-        ) {
+        if (3 === kol && iskDup.includes(urovIs)) {
         }
 
         if (
           (3 === kol && "Подать заявку" === podatString) ||
-          (iskDup[0] === urovIs &&
+          (iskDup.includes(urovIs) &&
             2 <= kol &&
-            "Подать заявку" === podatString) ||
-          (iskDup[1] === urovIs &&
-            2 <= kol &&
-            "Подать заявку" === podatString) ||
-          (iskDup[2] === urovIs && 2 <= kol && "Подать заявку" === podatString)
+            "Подать заявку" === podatString)
         ) {
           mainOkno =
             document.getElementsByName("mainWindow")[0].contentDocument;
@@ -577,19 +575,15 @@ function injected_main() {
           let iscinPerekl = mainOkno.querySelectorAll(".iskin__tpl");
           let posled;
           iskiny: for (var i = 0; i < iskinUrovList.length; i++) {
-            var urovIsk = Number(iskinUrovList[i].textContent);
-            var kolZa = Number(kolZayavka[i].textContent);
-            for (var j = 0; j < iscinPerekl.length; j++) {
+            let urovIsk = Number(iskinUrovList[i].textContent);
+            let kolZa = Number(kolZayavka[i].textContent);
+            for (let j = 0; j < iscinPerekl.length; j++) {
               var juk = Number(iscinPerekl[j].textContent);
               if (
                 (kolZa === 3 &&
                   juk === urovIsk &&
-                  urovIsk !== isklyuchit[0] &&
-                  urovIsk !== isklyuchit[1] &&
-                  urovIsk !== isklyuchit[2]) ||
-                (iskDup[0] === urovIsk && 2 <= kolZa && juk === urovIsk) ||
-                (iskDup[1] === urovIsk && 2 <= kolZa && juk === urovIsk) ||
-                (iskDup[2] === urovIsk && 2 <= kolZa && juk === urovIsk)
+                  !isklyuchit.includes(urovIsk)) ||
+                (iskDup.includes(urovIsk) && 2 <= kolZa && juk === urovIsk)
               ) {
                 posled = iscinPerekl[j];
                 break iskiny;
@@ -619,9 +613,12 @@ function injected_main() {
     let provEnki = (provPL) => {
       if (provPL) {
         main = document.getElementsByName("mainWindow")[0].contentDocument;
-      let energy = main.getElementById("Venergytext").textContent.split('/').map(Number).reduce((a,b)=> a/b)
-      
-        
+        let energy = main
+          .getElementById("Venergytext")
+          .textContent.split("/")
+          .map(Number)
+          .reduce((a, b) => a / b);
+
         main.getElementById("iskinButtonII").click();
         let scripts = main.getElementsByTagName("script").length;
         if (scripts < 9) {
@@ -634,15 +631,8 @@ function injected_main() {
               document.getElementsByName("mainWindow")[0].contentDocument;
             let kol = main.getElementById("total_req").textContent;
             let urovIs = Number(main.getElementById("iskin_level").textContent);
-            if (
-              "3" === kol ||
-              (iskDup[0] === urovIs && "2" === kol) ||
-              (iskDup[1] === urovIs && "2" === kol) ||
-              (iskDup[2] === urovIs && "2" === kol)
-            ) {
+            if ("3" === kol || (iskDup.includes(urovIs) && "2" === kol)) {
               main.getElementById("start_but").click();
-              let vremyaM = new Date().getMinutes();
-              let vremyaS = new Date().getSeconds();
               zapiska[urovIsk]++;
             }
           }, 500);
@@ -652,38 +642,40 @@ function injected_main() {
             document.getElementsByName("mainWindow")[0].contentDocument;
           let kol = main.getElementById("total_req").textContent;
           let urovIs = Number(main.getElementById("iskin_level").textContent);
-          if (
-            "3" === kol ||
-            (iskDup[0] === urovIs && "2" === kol) ||
-            (iskDup[1] === urovIs && 2 <= kol) ||
-            (iskDup[2] === urovIs && 2 <= kol)
-          ) {
-            
-           let energy = main.getElementById("Venergytext").textContent.split('/').map(Number).reduce((a,b)=> b - a); 
-           let proc = main.getElementById("Venergytext").textContent.split('/').map(Number)[1]*0.1;
-             if(energy - proc <= 50 && abi_50 < 80 ){
-               abi_50++;
-                main.getElementById('img16').click();
-             } else if (energy - proc <= 100 && abi_100 < 130){
-               abi_100++;
-               main.getElementById('img17').click();
-             } else if (abi_200 <= 80){
-               abi_200++;
-               main.getElementById('img18').click();
-             } else if (abilkaGos > 0 ){
-               abilkaGos--;
-               main.getElementById('scroll_365').click();
-             } else if (abilkaEkr > 0 ){
-               abilkaEkr--;
-               main.getElementById('scroll_586').click();
-             }
+          if ("3" === kol || (iskDup.includes(urovIs) && 2 == kol)) {
+            let energy = main
+              .getElementById("Venergytext")
+              .textContent.split("/")
+              .map(Number)
+              .reduce((a, b) => b - a);
+            let proc =
+              main
+                .getElementById("Venergytext")
+                .textContent.split("/")
+                .map(Number)[1] * 0.1;
+            if (energy - proc <= 50 && abi_50 < 80) {
+              abi_50++;
+              main.getElementById("img16").click();
+            } else if (energy - proc <= 100 && abi_100 < 130) {
+              abi_100++;
+              main.getElementById("img17").click();
+            } else if (abi_200 <= 80) {
+              abi_200++;
+              main.getElementById("img18").click();
+            } else if (abilkaGos > 0) {
+              abilkaGos--;
+              main.getElementById("scroll_365").click();
+            } else if (abilkaEkr > 0) {
+              abilkaEkr--;
+              main.getElementById("scroll_586").click();
+            }
             setTimeout(() => {
               main.getElementById("start_but").click();
               zapiska[urovIsk]++;
               if (urovIsk === iskinLimit) {
                 limit--;
                 if (limit <= 0) {
-                  isklyuchit[2] = Number(urovIsk);
+                  isklyuchit.push(Number(urovIsk));
                 }
               }
             }, 400);
@@ -695,16 +687,6 @@ function injected_main() {
       }
     };
     let provPlags = () => {
-      /**     let main = document.getElementsByName('mainWindow')[0].contentDocument;
-                       var plaginy = main.querySelectorAll('.viod img')
-                       for (var pl = 0; pl < plaginy.length; pl++) {
-                           if (plaginy[pl].src !== 'http://img.starcombats.com/programs/void.gif') {
-                               provPL = true;
-                           } else {
-                               dannye()
-                               return
-                           }
-                       }*/
       setTimeout(() => {
         provPL = true;
         provEnki(provPL);
@@ -732,53 +714,16 @@ function injected_main() {
         "; ";
       main.getElementsByTagName("body")[0].appendChild(script);
     }
-    switch (urovIsk) {
-      case "11":
-        main
-          .getElementById("new_complects")
-          .querySelector("li:nth-child(1)")
-          .click();
-        setTimeout(provPlags, 1500 + timeRnd);
-        break;
-      case "6":
-        main
-          .getElementById("new_complects")
-          .querySelector("li:nth-child(2)")
-          .click();
-        setTimeout(provPlags, 1500 + timeRnd);
-        break;
-      case "7":
-        main
-          .getElementById("new_complects")
-          .querySelector("li:nth-child(3)")
-          .click();
+    let complects = main.getElementById("new_complects");
+    if(Object.keys(complect).includes(urovIsk)){
+        complects.querySelector("li:nth-child("+complect[urovIsk]+")").click();
         setTimeout(provPlags, 2500 + timeRnd);
-        break;
-      case "8":
-        main
-          .getElementById("new_complects")
-          .querySelector("li:nth-child(4)")
-          .click();
-        setTimeout(provPlags, 2500 + timeRnd);
-        break;
-      case "9":
-        main
-          .getElementById("new_complects")
-          .querySelector("li:nth-child(5)")
-          .click();
-        setTimeout(provPlags, 2500 + timeRnd);
-        break;
-      case "0":
+    } else {
         setTimeout(() => {
           provEnki(true);
         }, 2000 + timeRnd);
-        break;
-      default:
-        setTimeout(() => {
-          provEnki(true);
-        }, 2000 + timeRnd);
-        break;
     }
+    
   };
 
   let kontZamena = () => {
@@ -810,9 +755,7 @@ function injected_main() {
 
         if (
           3 === kol ||
-          (iskDup[0] === urovIs && 2 <= kol) ||
-          (iskDup[1] === urovIs && 2 <= kol) ||
-          (iskDup[2] === urovIs && 2 <= kol)
+          (iskDup.includes(urovIs) && 2 <= kol)
         ) {
           proverka();
         } else {

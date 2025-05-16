@@ -123,18 +123,18 @@ function use_scroll(id) {
 }
 // "editor.unicodeHighlight.ambiguousCharacters": false 660 - 270 =  
 function injected_main(){
-    let abils50 = 0,
-    abils100 = 0,
-    abils200 = 0,
+    let abils50 = 80,
+    abils100 = 100,
+    abils200 = 40,
     gos = 0,
     euro = 0;
     const stavim = 0,// каким ставим
     nonAbils = true,// ждать пока энка восстановится
-    complect = false,
+    complect = true,
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 22;
+    started = 36;
     const doptime = 100;
     let main;
     const obnovScript = () => {
