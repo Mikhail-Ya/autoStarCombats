@@ -174,7 +174,7 @@ function put_scroll(id, new_name, is_use, container_id, code)
 function injected_main(){
   const programs_name = ['Миниверфь','Минибокс'],
         complect_light = 4,
-        complect_max = 7,
+        complect_max = 3,
         number_of_uses = 600;
   let uses = 0;
           let timeRdn = Math.floor(Math.random()*2000)

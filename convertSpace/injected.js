@@ -4,6 +4,7 @@ function injected_main(){
 	let triggerS = 600;
 	
 	let kolDoObnov = 0;
+	let sign_change = 0;
 
 	let ustanovka=()=>{
 		const timeRnd = Math.floor(Math.random()*1000),
@@ -50,7 +51,7 @@ function injected_main(){
 					},timeRnd+2000);
 				},timeRnd+4000)
 			} else if(oblomAstron > 9 && oblomok > 9){
-				znakDarkGet.click()
+				if(sign_change > 0){ znakDarkGet.click(); --sign_change } else { znakSvetGet.click() };
 				setTimeout(()=>{
 					let mainOko = document.getElementsByName('mainWindow')[0].contentDocument;
 					let usingBtn = mainOko.querySelector('#but1');

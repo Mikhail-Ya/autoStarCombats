@@ -56,41 +56,38 @@ function delete_scroll(id, new_name)
   
 }
 function injected_main(){
-      let iskomoe = new Array;
-      let iskomoeKol = 0;
+      let reqItems;
+      let quantity = 0;
       let beginner = true;
         function testAuto(){
-          let mainOkno = document.getElementsByName('mainWindow')[0].contentDocument;
-          
-          let iskomoeName = 'Мультистрелок v3.0 CV';
-          let obshee = mainOkno.querySelectorAll('#type1_1 .item'); 
-              var script = document.createElement("script");
-                  script.setAttribute("type", "text/javascript");
-                  script.innerHTML = delete_scroll ;
-                  mainOkno.getElementsByTagName('head')[0].appendChild(script);
-
-          for (var i = obshee.length - 1; i >= 0; i--) {
-            var block = obshee[i]
-            if (block.querySelector('h1').textContent === iskomoeName){
-              iskomoe.push(block);
-              iskomoeKol++
-            }
-          }
-          if(iskomoe.length > 0 && beginner){
+          const mainOkno = document.getElementsByName('mainWindow')[0].contentDocument,
+           requiredElement = 'Мультистрелок v3.0 CV',
+           obshee = mainOkno.querySelectorAll('#type1_1 .item'); 
+          // подмена скрипта
+          let script = document.createElement("script");
+            script.setAttribute("type", "text/javascript");
+            script.innerHTML = delete_scroll ;
+            mainOkno.getElementsByTagName('head')[0].appendChild(script);
+          // отфильтровываем нужное
+          reqItems = new Array(...obshee).filter(el => el.querySelector('h1').textContent === requiredElement)
+          // проверяем наличие необходимого и вызываем функцию удаления
+          if(reqItems.length > 0 && beginner){
+            quantity = reqItems.length
             interDelet()
              beginner = false
           } 
         }
         function interDelet (){ 
-            if (iskomoeKol > 0) {
-              var kont = iskomoe[iskomoeKol-1];
-              var delBtn = kont.querySelector('tr:nth-child(2) td:nth-child(4) img')
+            let delBtn;
+            if (quantity > 0) {
+              let kont = reqItems[quantity-1];
+              delBtn = kont.querySelector('tr:nth-child(2) td:nth-child(4) img');
             } else {
               ostanov()
               return
             }
             if (delBtn) {
-              iskomoeKol--;
+              quantity--;
               delBtn.click()
               clearTimeout()
               setTimeout(interDelet,1500)

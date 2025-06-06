@@ -134,7 +134,7 @@ function injected_main(){
     downup = true,// ставить от stavim
     proba = 1,
     trigger = false,
-    started = 36;
+    started = 46;
     const doptime = 100;
     let main;
     const obnovScript = () => {

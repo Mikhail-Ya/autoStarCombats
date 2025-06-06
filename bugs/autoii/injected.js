@@ -770,3 +770,6 @@ function injected_main() {
 }
 // onclick="let kol=0;setInterval(()=>{if(100>kol){document.getElementById('but1').click(); kol++}else{clearInterval()}},1000)" сборки имплов или кристаллов в конверторе
 //&& iskDup[1]!==urovIs && iskDup[2]!==urovIs && iskDup[0]!==urovIs
+
+
+//onclick="let kol=0;setInterval(()=>{if(2750>kol){plus('skill'); kol++}else{clearInterval()}},10)"

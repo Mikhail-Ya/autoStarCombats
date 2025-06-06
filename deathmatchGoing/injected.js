@@ -2,8 +2,9 @@
 
 function injected_main(){
   let dubleSector, propusk;
-  const centGor = 53,
-        centVer = 7; 
+  const centGor = 54,
+        centVer = 3;
+  let exception = '24559S';
   const konecTime = 60;
         const deystvie =()=>{
                 const main_win = document.getElementsByName('mainWindow')[0].contentDocument,
@@ -75,7 +76,7 @@ function injected_main(){
                 }
                 switch (napravlenie){
                         case 'N':
-                                if (vertical>centVer&&pryamo) {
+                                if (vertical>centVer&&pryamo|| exception === polSec) {
                                         dalshe.click()
                                 } else if (gorizont>centGor&&levo) {
                                         vLevo.click()
@@ -89,7 +90,7 @@ function injected_main(){
                                  } else if(pryamo){dalshe.click()} else {vPravo.click()}
                                 break
                         case 'W':
-                                if (gorizont>centGor&&pryamo) {
+                                if (gorizont>centGor&&pryamo|| exception === polSec) {
                                         dalshe.click()
                                 } else if (vertical<centVer&&levo) {
                                         vLevo.click()
@@ -103,7 +104,7 @@ function injected_main(){
                                  } else if(pryamo){dalshe.click()} else {vPravo.click()}
                                 break
                         case 'S':
-                                if (vertical<centVer&&pryamo) {
+                                if (vertical<centVer&&pryamo|| exception === polSec) {
                                         dalshe.click()
                                 } else if (gorizont<centGor&&levo) {
                                         vLevo.click()
@@ -117,7 +118,7 @@ function injected_main(){
                                  } else if(pryamo){dalshe.click()} else {vPravo.click()}
                                 break
                         case 'E':
-                                if (gorizont<centGor&&pryamo) {
+                                if (gorizont<centGor&&pryamo|| exception === polSec) {
                                         dalshe.click()
                                 } else if (vertical>centVer&&levo) {
                                         vLevo.click()
